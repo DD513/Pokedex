@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle, #f6f6f6 0%, #e0e0e0 100%);
+  color: #333333;
+  min-height: 100vh;
+}
+
+h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 30px;
+  color: #ffcb05; /* 寶可夢黃色 */
+  text-shadow: 0 1px 2px #333, 0 0 10px #ffcb05;
+}

@@ -1,0 +1,41 @@
+.card {
+  width: 300px;
+  height: 420px;
+  background: linear-gradient(145deg, #ffffff, #f1f1f1);
+  border: 3px solid #ffcb05; /* 黃色邊框 */
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 203, 5, 0.4);
+  position: relative;
+  margin: 20px auto;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 203, 5, 0.6);
+}
+
+/* 卡片內的圖片 */
+.card img {
+  width: 80%;
+  margin: 10px auto;
+  display: block;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+}
+
+/* 卡片文字 */
+.card .card-title {
+  font-size: 1.5rem;
+  color: #e63946; /* 紅色標題 */
+  margin-top: 10px;
+  text-shadow: 0 1px 2px #333;
+}
+
+.card .card-description {
+  font-size: 1rem;
+  color: #555;
+  margin: 10px 15px;
+}
