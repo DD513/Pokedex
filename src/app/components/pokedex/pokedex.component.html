@@ -1,20 +1,49 @@
-<div class="pokemon-container">
-  <div *ngFor="let pokemon of pokemonList" class="card">
+<div class="header">
+  <h1 class="title">寶可夢圖鑑</h1>
+  <div class="stats">
+    <div class="search-area">
+      <input
+        type="text"
+        placeholder="搜尋寶可夢..."
+        class="search-box"
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+        (compositionstart)="isComposing = true"
+        (compositionend)="onCompositionEnd()"
+      />
+    </div>
+  </div>
+</div>
+
+<div
+  class="pokemon-container"
+  *ngIf="filteredPokemonList.length > 0; else noResults"
+>
+  <div *ngFor="let pokemon of filteredPokemonList" class="card">
     <img [src]="pokemon.Img" [alt]="pokemon.EnglishName" />
     <h3 class="card-title">
       {{ pokemon.ChineseName }} ({{ pokemon.EnglishName }})
     </h3>
     <div class="card-details">
       <p class="card-description">{{ pokemon.Description }}</p>
-      <p>類別: {{ pokemon.Category }}</p>
       <p>
         類型:
         <span *ngFor="let type of pokemon.Types" class="type-badge">
           {{ type.Name }}
         </span>
       </p>
-      <p>身高: {{ pokemon.Height }} m</p>
-      <p>體重: {{ pokemon.Weight }} kg</p>
     </div>
   </div>
 </div>
+
+<ng-template #noResults>
+  <div class="no-results">
+    <img
+      src="/assets/images/NotFound.png"
+      alt="Pokemon Not Found"
+      class="no-results-img"
+    />
+    沒有尋找到寶可夢。<br />
+    <span>用別的條件重新搜尋吧。</span>
+  </div>
+</ng-template>

@@ -19,4 +19,17 @@ export class PokemonService {
   getPokemonByCode(code: string): Pokemon | undefined {
     return this.pokemonData.find((pokemon) => pokemon.Code === code);
   }
+
+  // 搜尋寶可夢
+  searchPokemon(query: string): Pokemon[] {
+    const lowerQuery = query.toLowerCase().trim();
+    return this.pokemonData.filter(
+      (pokemon) =>
+        pokemon.ChineseName.toLowerCase().includes(lowerQuery) ||
+        pokemon.EnglishName.toLowerCase().includes(lowerQuery) ||
+        pokemon.Types.some((type) =>
+          type.Name.toLowerCase().includes(lowerQuery)
+        )
+    );
+  }
 }
