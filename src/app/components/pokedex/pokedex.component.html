@@ -1,10 +1,20 @@
-<div class="card">
-  <img
-    src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
-    alt="Bulbasaur"
-  />
-  <h3 class="card-title">妙蛙種子</h3>
-  <p class="card-description">
-    妙蛙種子是草和毒屬性寶可夢，擁有強大的成長潛力！
-  </p>
+<div class="pokemon-container">
+  <div *ngFor="let pokemon of pokemonList" class="card">
+    <img [src]="pokemon.Img" [alt]="pokemon.EnglishName" />
+    <h3 class="card-title">
+      {{ pokemon.ChineseName }} ({{ pokemon.EnglishName }})
+    </h3>
+    <div class="card-details">
+      <p class="card-description">{{ pokemon.Description }}</p>
+      <p>類別: {{ pokemon.Category }}</p>
+      <p>
+        類型:
+        <span *ngFor="let type of pokemon.Types" class="type-badge">
+          {{ type.Name }}
+        </span>
+      </p>
+      <p>身高: {{ pokemon.Height }} m</p>
+      <p>體重: {{ pokemon.Weight }} kg</p>
+    </div>
+  </div>
 </div>
