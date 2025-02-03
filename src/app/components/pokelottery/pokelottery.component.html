@@ -1,29 +1,57 @@
 <div class="card">
-  <h2>寶可夢抽抽樂</h2>
-  <p>按下按鈕，試試你的運氣吧！</p>
-  <button class="lottery-button" (click)="drawLottery()" [disabled]="isDrawing">
-    抽抽樂
-  </button>
-
-  <div *ngIf="lotteryResult; else loadingTemplate" class="lottery-result">
-    <img [src]="lotteryResult.Img" [alt]="lotteryResult.EnglishName" />
-    <p>編號: {{ lotteryResult.Code }}</p>
-    <p>類別: {{ lotteryResult.Category }}</p>
-    <p>中文名稱: {{ lotteryResult.ChineseName }}</p>
-    <p>英文名稱: {{ lotteryResult.EnglishName }}</p>
-    <p>說明: {{ lotteryResult.Description }}</p>
-    <p>
-      類型:
-      <span *ngFor="let type of lotteryResult.Types" class="type-badge">
-        {{ type.Name }}
-      </span>
-    </p>
-    <p>高度: {{ lotteryResult.Height }} m</p>
+  <div class="left-section">
+    <h2 class="title">寶可夢抽抽樂</h2>
+    <p class="instruction">按下按鈕，試試你的運氣吧！</p>
+    <button
+      class="lottery-button"
+      (click)="drawLottery()"
+      [disabled]="isDrawing"
+    >
+      抽抽樂
+    </button>
+    <p class="game-count">遊戲次數: {{ gameCount }}</p>
   </div>
 
-  <ng-template #loadingTemplate>
-    <p class="loading-text">寶可夢載入中...</p>
-  </ng-template>
+  <div class="right-section">
+    <ng-container *ngIf="lotteryResult; else loadingTemplate">
+      <div class="lottery-result">
+        <div class="pokemon-card">
+          <img [src]="lotteryResult.Img" [alt]="lotteryResult.EnglishName" />
+          <div class="pokemon-info">
+            <div class="pokemon-name-row">
+              <p class="pokemon-name">
+                {{ lotteryResult.ChineseName }}
+                ({{ lotteryResult.EnglishName }})
+              </p>
+            </div>
+            <div class="pokemon-details">
+              <p><strong>類別:</strong> {{ lotteryResult.Category }}</p>
+              <p><strong>高度:</strong> {{ lotteryResult.Height }} m</p>
+              <p>
+                <strong>類型:</strong>
+                <span
+                  *ngFor="let type of lotteryResult.Types"
+                  class="type-badge"
+                >
+                  {{ type.Name }}
+                </span>
+              </p>
+            </div>
+            <p class="pokemon-description">{{ lotteryResult.Description }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
 
-  <p>遊戲次數: {{ gameCount }}</p>
+    <ng-template #loadingTemplate>
+      <div class="loading-container">
+        <img
+          src="assets/images/loading-egg.png"
+          alt="Loading"
+          class="loading-icon"
+        />
+        <p class="loading-text">寶可夢載入中...</p>
+      </div>
+    </ng-template>
+  </div>
 </div>

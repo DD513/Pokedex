@@ -1,67 +1,117 @@
 .card {
-  width: 500px;
-  height: 700px;
-  background: linear-gradient(145deg, #ffffff, #f9f9f9); /* 柔和的漸層背景 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 700px;
+  min-height: 500px;
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
   border: 3px solid #ffcb05;
   border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2), 0 0 25px rgba(255, 203, 5, 0.5); /* 陰影效果 */
-  position: relative;
-  margin: 20px auto;
-  text-align: center;
   padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2), 0 0 25px rgba(255, 203, 5, 0.5);
+  margin: 40px auto;
 }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 203, 5, 0.6); /* 增強懸停效果 */
+/* 左側區域 */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  color: #ffcb05;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.instruction {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
 }
 
 .lottery-button {
+  display: block;
   background: linear-gradient(90deg, #ffcb05, #e63946);
   border: none;
   color: #fff;
   font-size: 1.2rem;
   font-weight: bold;
-  padding: 15px 30px;
+  padding: 10px 20px;
   border-radius: 30px;
-  text-transform: uppercase;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(255, 203, 5, 0.8), 0 0 15px rgba(255, 71, 87, 0.6);
   transition: all 0.3s ease;
+  margin-bottom: 15px;
 }
 
-.lottery-button:hover {
-  box-shadow: 0 0 20px rgba(255, 203, 5, 1), 0 0 30px rgba(255, 71, 87, 0.8);
-  transform: scale(1.1);
+.game-count {
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
 }
 
-.lottery-button:disabled {
-  background: rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.5);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  cursor: not-allowed;
-  backdrop-filter: blur(5px);
-  box-shadow: none;
+/* 右側區域 */
+.right-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1.5;
 }
 
 .lottery-result {
-  margin-top: 20px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #333;
-  border: 2px dashed #ffcb05;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
+.pokemon-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* 寶可夢圖片 */
 .lottery-result img {
-  width: 200px;
+  width: 150px;
   height: auto;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 寶可夢資訊 */
+.pokemon-info {
+  padding: 10px;
+  text-align: center;
+}
+
+.pokemon-name-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pokemon-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e63946;
+}
+
+.pokemon-details p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .type-badge {
@@ -69,25 +119,51 @@
   background-color: #ffcb05;
   color: #fff;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   margin: 0 5px;
   font-size: 0.9rem;
   font-weight: bold;
 }
 
 .loading-text {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #777;
   font-weight: bold;
-  margin-top: 20px;
-  animation: fadeIn 1s infinite alternate;
+  text-align: center;
+  animation: pulse 1.5s infinite alternate ease-in-out;
 }
 
-@keyframes fadeIn {
+@keyframes pulse {
   from {
-    opacity: 0.5;
+    transform: scale(1);
+    opacity: 0.8;
   }
   to {
+    transform: scale(1.1);
     opacity: 1;
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loading-icon {
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+/* 旋轉動畫 */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
