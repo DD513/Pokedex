@@ -32,4 +32,10 @@ export class PokemonService {
         )
     );
   }
+
+  // 隨機抽取一隻寶可夢
+  getRandomPokemon(): Pokemon {
+    const randomIndex = Math.floor(Math.random() * this.pokemonData.length);
+    return this.pokemonData[randomIndex];
+  }
 }

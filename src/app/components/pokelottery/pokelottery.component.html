@@ -1,5 +1,29 @@
 <div class="card">
   <h2>寶可夢抽抽樂</h2>
   <p>按下按鈕，試試你的運氣吧！</p>
-  <button class="neon-button">抽抽樂</button>
+  <button class="lottery-button" (click)="drawLottery()" [disabled]="isDrawing">
+    抽抽樂
+  </button>
+
+  <div *ngIf="lotteryResult; else loadingTemplate" class="lottery-result">
+    <img [src]="lotteryResult.Img" [alt]="lotteryResult.EnglishName" />
+    <p>編號: {{ lotteryResult.Code }}</p>
+    <p>類別: {{ lotteryResult.Category }}</p>
+    <p>中文名稱: {{ lotteryResult.ChineseName }}</p>
+    <p>英文名稱: {{ lotteryResult.EnglishName }}</p>
+    <p>說明: {{ lotteryResult.Description }}</p>
+    <p>
+      類型:
+      <span *ngFor="let type of lotteryResult.Types" class="type-badge">
+        {{ type.Name }}
+      </span>
+    </p>
+    <p>高度: {{ lotteryResult.Height }} m</p>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <p class="loading-text">寶可夢載入中...</p>
+  </ng-template>
+
+  <p>遊戲次數: {{ gameCount }}</p>
 </div>
