@@ -27,11 +27,14 @@
             <div class="pokemon-details">
               <p><strong>類別:</strong> {{ lotteryResult.Category }}</p>
               <p><strong>高度:</strong> {{ lotteryResult.Height }} m</p>
+
               <p>
                 <strong>類型:</strong>
                 <span
                   *ngFor="let type of lotteryResult.Types"
                   class="type-badge"
+                  [style.backgroundColor]="getTypeColor(type.Name)"
+                  [style.color]="'#fff'"
                 >
                   {{ type.Name }}
                 </span>

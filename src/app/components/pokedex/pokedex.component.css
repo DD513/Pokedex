@@ -116,19 +116,18 @@ body {
 /* 類型徽章 */
 .type-badge {
   display: inline-block;
-  background-color: #edf2f4;
-  color: #2b2d42;
-  border-radius: 12px;
-  padding: 3px 10px;
+  color: #fff; /* 確保字體顏色為白色 */
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
   margin: 4px;
-  font-size: 0.85rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
 .card:hover .type-badge {
-  background-color: #ffcb05; /* 懸停時改變背景顏色 */
-  color: #fff; /* 改變文字顏色 */
   transform: scale(1.1);
 }
 

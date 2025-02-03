@@ -37,4 +37,9 @@ export class PokedexComponent implements OnInit {
     this.isComposing = false; // 組字完成
     this.searchSubject.next(this.searchQuery); // 組字完成後執行搜尋
   }
+
+  // 從 service 獲取寶可夢types顏色
+  getTypeColor(type: string): string {
+    return this.pokemonService.getTypeColor(type);
+  }
 }

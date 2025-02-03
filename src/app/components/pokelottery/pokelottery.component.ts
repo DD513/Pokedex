@@ -31,4 +31,7 @@ export class PokelotteryComponent implements OnInit {
       this.isDrawing = false;
     }, 800);
   }
+  getTypeColor(type: string): string {
+    return this.pokemonService.getTypeColor(type);
+  }
 }

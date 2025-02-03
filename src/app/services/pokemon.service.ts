@@ -38,4 +38,29 @@ export class PokemonService {
     const randomIndex = Math.floor(Math.random() * this.pokemonData.length);
     return this.pokemonData[randomIndex];
   }
+
+  // 寶可夢類型顏色對應
+  getTypeColor(type: string): string {
+    const typeColors: { [key: string]: string } = {
+      草: "#78C850",
+      毒: "#A040A0",
+      火: "#F08030",
+      水: "#6890F0",
+      一般: "#A8A878",
+      飛行: "#A890F0",
+      電: "#F8D030",
+      地面: "#E0C068",
+      妖精: "#EE99AC",
+      超能力: "#F85888",
+      格鬥: "#C03028",
+      岩石: "#B8A038",
+      冰: "#98D8D8",
+      龍: "#7038F8",
+      鋼: "#B8B8D0",
+      幽靈: "#705898",
+      昆蟲: "#A8B820",
+      暗黑: "#705848",
+    };
+    return typeColors[type] || "#FFCB05"; // 預設黃色
+  }
 }
