@@ -1,0 +1,8 @@
+{
+    "/Service": {
+      "target": "https://data.moa.gov.tw",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }
