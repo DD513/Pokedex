@@ -5,9 +5,9 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { PokedexComponent } from "./components/pokedex/pokedex.component";
-import { PokelotteryComponent } from "./components/pokelottery/pokelottery.component";
-import { TravelFoodComponent } from "./components/travel-food/travel-food.component";
+import { PokedexComponent } from "./pages/pokedex/pokedex.component";
+import { PokelotteryComponent } from "./pages/pokelottery/pokelottery.component";
+import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
 
 @NgModule({
   declarations: [

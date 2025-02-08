@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Pokemon } from "../../models/pokemon.model";
-import { PokemonService } from "../../services/pokemon.service";
+import { PokemonService } from "../../shared/services/pokemon.service";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 

@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { PokedexComponent } from "./components/pokedex/pokedex.component";
-import { PokelotteryComponent } from "./components/pokelottery/pokelottery.component";
-import { TravelFoodComponent } from "./components/travel-food/travel-food.component";
+import { PokedexComponent } from "./pages/pokedex/pokedex.component";
+import { PokelotteryComponent } from "./pages/pokelottery/pokelottery.component";
+import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/pokedex", pathMatch: "full" }, // 預設路由
