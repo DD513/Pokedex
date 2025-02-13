@@ -12,8 +12,7 @@ import { debounceTime } from "rxjs/operators";
 export class PokedexComponent implements OnInit {
   pokemonList: Pokemon[] = [];
   filteredPokemonList: Pokemon[] = [];
-  searchQuery: string = "";
-  isComposing: boolean = false; // 追蹤中文組字狀態
+
   private searchSubject: Subject<string> = new Subject<string>(); // RxJS Subject
 
   constructor(private pokemonService: PokemonService) {}
@@ -28,18 +27,7 @@ export class PokedexComponent implements OnInit {
     });
   }
 
-  onSearch(): void {
-    if (this.isComposing) return; // 組字進行中，不觸發搜尋
-    this.searchSubject.next(this.searchQuery); // 將輸入值推送至 Subject
-  }
-
-  onCompositionEnd(): void {
-    this.isComposing = false; // 組字完成
-    this.searchSubject.next(this.searchQuery); // 組字完成後執行搜尋
-  }
-
-  // 從 service 獲取寶可夢types顏色
-  getTypeColor(type: string): string {
-    return this.pokemonService.getTypeColor(type);
+  onSearch(query: string): void {
+    this.searchSubject.next(query);
   }
 }

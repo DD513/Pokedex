@@ -1,0 +1,21 @@
+.search-area {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.search-box {
+  width: 90%;
+  max-width: 600px;
+  padding: 16px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  text-overflow: ellipsis;
+}
+
+.search-box:focus {
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}

@@ -1,17 +1,7 @@
 <div class="header">
   <h1 class="title">寶可夢圖鑑</h1>
   <div class="stats">
-    <div class="search-area">
-      <input
-        type="text"
-        placeholder="搜尋寶可夢..."
-        class="search-box"
-        [(ngModel)]="searchQuery"
-        (input)="onSearch()"
-        (compositionstart)="isComposing = true"
-        (compositionend)="onCompositionEnd()"
-      />
-    </div>
+    <pokedex-search-bar (search)="onSearch($event)"></pokedex-search-bar>
   </div>
 </div>
 

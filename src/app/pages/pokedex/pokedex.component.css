@@ -18,29 +18,6 @@
   font-family: "Roboto", sans-serif;
 }
 
-.stats .search-area {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.stats .search-box {
-  width: 90%;
-  max-width: 600px; /* 最大寬度 */
-  padding: 16px;
-  font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 30px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  text-overflow: ellipsis; /* 超出部分以省略號表示 */
-}
-
-.stats .search-box:focus {
-  outline: none;
-  /* border-color: #007bff; */
-  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
-}
-
 body {
   padding: 20px;
   background-color: #f8f9fa; /* 淡灰背景增加對比度 */

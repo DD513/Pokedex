@@ -1,0 +1,11 @@
+<div class="search-area">
+  <input
+    type="text"
+    placeholder="搜尋寶可夢..."
+    class="search-box"
+    [(ngModel)]="searchQuery"
+    (input)="onSearch()"
+    (compositionstart)="isComposing = true"
+    (compositionend)="onCompositionEnd()"
+  />
+</div>
