@@ -13,48 +13,9 @@
   </div>
 
   <div class="right-section">
-    <ng-container *ngIf="lotteryResult; else loadingTemplate">
-      <div class="lottery-result">
-        <div class="pokemon-card">
-          <img [src]="lotteryResult.Img" [alt]="lotteryResult.EnglishName" />
-          <div class="pokemon-info">
-            <div class="pokemon-name-row">
-              <p class="pokemon-name">
-                {{ lotteryResult.ChineseName }}
-                ({{ lotteryResult.EnglishName }})
-              </p>
-            </div>
-            <div class="pokemon-details">
-              <p><strong>類別:</strong> {{ lotteryResult.Category }}</p>
-              <p><strong>高度:</strong> {{ lotteryResult.Height }} m</p>
-
-              <p>
-                <strong>類型:</strong>
-                <span
-                  *ngFor="let type of lotteryResult.Types"
-                  class="type-badge"
-                  [style.backgroundColor]="getTypeColor(type.Name)"
-                  [style.color]="'#fff'"
-                >
-                  {{ type.Name }}
-                </span>
-              </p>
-            </div>
-            <p class="pokemon-description">{{ lotteryResult.Description }}</p>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-
-    <ng-template #loadingTemplate>
-      <div class="loading-container">
-        <img
-          src="assets/images/loading-egg.png"
-          alt="Loading"
-          class="loading-icon"
-        />
-        <p class="loading-text">寶可夢載入中...</p>
-      </div>
-    </ng-template>
+    <app-lottery-result
+      [lotteryResult]="lotteryResult"
+      [isDrawing]="isDrawing"
+    ></app-lottery-result>
   </div>
 </div>

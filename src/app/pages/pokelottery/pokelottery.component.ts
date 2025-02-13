@@ -15,23 +15,22 @@ export class PokelotteryComponent implements OnInit {
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit() {
-    this.lotteryResult = this.pokemonService.getRandomPokemon(); // 立即顯示第一隻寶可夢
-    this.gameCount = 1;
+    this.startNewLottery(); // 直接顯示初始寶可夢
   }
 
   drawLottery() {
     if (this.isDrawing) return; // 如果正在抽獎，直接返回，避免重複點擊
-
     this.isDrawing = true;
     this.lotteryResult = null;
 
     setTimeout(() => {
-      this.lotteryResult = this.pokemonService.getRandomPokemon();
-      this.gameCount++;
-      this.isDrawing = false;
+      this.startNewLottery();
     }, 800);
   }
-  getTypeColor(type: string): string {
-    return this.pokemonService.getTypeColor(type);
+
+  private startNewLottery() {
+    this.lotteryResult = this.pokemonService.getRandomPokemon();
+    this.gameCount++;
+    this.isDrawing = false;
   }
 }
