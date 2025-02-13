@@ -12,6 +12,10 @@ const routes: Routes = [
     component: LayoutComponent, // 讓所有子路由都包在 LayoutComponent 裡
     children: [
       { path: "", redirectTo: "/pokedex", pathMatch: "full" },
+      // {
+      //   path: "pokedex",
+      //   loadChildren: "./pages/pokedex/pokedex.module#PokedexModule",
+      // },
       { path: "pokedex", component: PokedexComponent },
       { path: "pokelottery", component: PokelotteryComponent },
       { path: "travel-food", component: TravelFoodComponent },
