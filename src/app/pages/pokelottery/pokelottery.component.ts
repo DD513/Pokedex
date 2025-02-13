@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { PokemonService } from "../../shared/services/pokemon.service";
-import { Pokemon } from "../../models/pokemon.model";
+import { PokemonService } from "../../core/services/pokemon.service";
+import { Pokemon } from "../../core/models/pokemon.model";
 
 @Component({
   selector: "app-pokelottery",
