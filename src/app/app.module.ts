@@ -8,6 +8,9 @@ import { AppComponent } from "./app.component";
 import { PokedexComponent } from "./pages/pokedex/pokedex.component";
 import { PokelotteryComponent } from "./pages/pokelottery/pokelottery.component";
 import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
+import { LayoutComponent } from './components/layout/layout.component';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
     PokedexComponent,
     PokelotteryComponent,
     TravelFoodComponent,
+    LayoutComponent,
+    NavbarComponent,
+    FooterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

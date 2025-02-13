@@ -1,0 +1,32 @@
+footer {
+  background: #3b4cca;
+  background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px
+    ),
+    radial-gradient(circle, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+  background-size: 40px 40px, 80px 80px;
+  color: white;
+  padding: 5px;
+  border-top: 3px solid #ffcb05;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+}
