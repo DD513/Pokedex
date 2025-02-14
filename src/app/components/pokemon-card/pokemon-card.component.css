@@ -21,7 +21,7 @@
 }
 
 /* 卡片內的圖片 */
-.card img {
+.pokemon-Img {
   width: 72%;
   margin: 10px auto;
   display: block;
@@ -66,4 +66,24 @@
 
 .card:hover .type-badge {
   transform: scale(1.1);
+}
+
+/* 收藏按鈕 */
+.favorite-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.1);
+}
+
+.favorite-icon img {
+  width: 100%;
+  height: auto;
 }

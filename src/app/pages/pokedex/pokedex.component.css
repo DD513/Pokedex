@@ -24,6 +24,65 @@ body {
   margin: 0;
 }
 
+/* 按鈕容器 */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* 收藏按鈕樣式 */
+.favorite-toggle {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 20px;
+  width: 160px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #ffcb05;
+  background-color: white;
+  color: #999999;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.favorite-toggle:hover {
+  background-color: #ffcb05;
+  color: #ffffff;
+}
+
+.favorite-toggle.active {
+  background-color: #ffcb05;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(255, 203, 5, 0.6);
+}
+
+/* 清空收藏按鈕 */
+.clear-favorites {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 20px;
+  width: 160px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #e63946;
+  background-color: white;
+  color: #e63946;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.clear-favorites:hover {
+  background-color: #e63946;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(230, 57, 70, 0.6);
+}
+
 /* 寶可夢卡片容器 */
 .pokemon-container {
   display: grid;

@@ -1,14 +1,19 @@
 import { Injectable } from "@angular/core";
 import { Pokemon } from "../models/pokemon.model";
 import { POKEMON_DATA } from "../data/pokemon.data";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class PokemonService {
   private pokemonData: Pokemon[] = POKEMON_DATA;
+  private favoritePokemonCodes: Set<string> = new Set();
+  private favoritesSubject = new BehaviorSubject<Set<string>>(new Set()); // 讓 PokedexComponent 可以訂閱收藏變化
 
-  constructor() {}
+  constructor() {
+    this.loadFavorites();
+  }
 
   // 獲取所有寶可夢資料
   getAllPokemon(): Pokemon[] {
@@ -37,6 +42,60 @@ export class PokemonService {
   getRandomPokemon(): Pokemon {
     const randomIndex = Math.floor(Math.random() * this.pokemonData.length);
     return this.pokemonData[randomIndex];
+  }
+
+  // 讀取收藏的寶可夢 (從 localStorage)
+  private loadFavorites(): void {
+    const storedFavorites = localStorage.getItem("favoritePokemon");
+    if (storedFavorites) {
+      try {
+        this.favoritePokemonCodes = new Set(JSON.parse(storedFavorites));
+        this.favoritesSubject.next(this.favoritePokemonCodes);
+      } catch (error) {
+        console.error("無法解析收藏紀錄", error);
+        this.favoritePokemonCodes = new Set();
+      }
+    }
+  }
+
+  // 檢查是否已收藏
+  isFavorite(pokemon: Pokemon): boolean {
+    return this.favoritePokemonCodes.has(pokemon.Code);
+  }
+
+  // 切換收藏狀態
+  toggleFavorite(pokemon: Pokemon): void {
+    if (this.favoritePokemonCodes.has(pokemon.Code)) {
+      this.favoritePokemonCodes.delete(pokemon.Code);
+    } else {
+      this.favoritePokemonCodes.add(pokemon.Code);
+    }
+    localStorage.setItem(
+      "favoritePokemon",
+      JSON.stringify([...this.favoritePokemonCodes])
+    );
+
+    // 發送更新通知
+    this.favoritesSubject.next(this.favoritePokemonCodes);
+  }
+
+  // 取得所有收藏的寶可夢
+  getFavoritePokemon(): Pokemon[] {
+    return this.pokemonData.filter((pokemon) =>
+      this.favoritePokemonCodes.has(pokemon.Code)
+    );
+  }
+
+  // 監聽收藏狀態變化
+  getFavoritesObservable() {
+    return this.favoritesSubject.asObservable();
+  }
+
+  // 清空收藏
+  clearFavorites(): void {
+    this.favoritePokemonCodes.clear();
+    localStorage.removeItem("favoritePokemon");
+    this.favoritesSubject.next(new Set());
   }
 
   // 寶可夢類型顏色對應

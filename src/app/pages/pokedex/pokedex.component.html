@@ -3,6 +3,19 @@
   <div class="stats">
     <pokedex-search-bar (search)="onSearch($event)"></pokedex-search-bar>
   </div>
+  <div class="buttons">
+    <button
+      class="favorite-toggle"
+      [class.active]="showFavorites"
+      (click)="toggleShowFavorites()"
+    >
+      {{ showFavorites ? "顯示所有寶可夢" : "只顯示我的收藏" }}
+    </button>
+
+    <button class="clear-favorites" (click)="clearAllFavorites()">
+      清空收藏
+    </button>
+  </div>
 </div>
 
 <div
@@ -12,6 +25,8 @@
   <app-pokemon-card
     *ngFor="let pokemon of filteredPokemonList"
     [pokemon]="pokemon"
+    [isFavorite]="isFavorite(pokemon)"
+    (toggleFavorite)="toggleFavorite($event)"
   ></app-pokemon-card>
 </div>
 
