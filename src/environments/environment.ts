@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  travelFoodUrl:
-    "https://data.moa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelFood.aspx",
+  travelFoodUrl: "https://data.moa.gov.tw/Service",
 };
 
 /*

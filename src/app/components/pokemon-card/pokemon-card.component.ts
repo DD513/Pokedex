@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Pokemon } from "../../core/models/pokemon.model";
 import { PokemonService } from "../../core/services/pokemon.service";
+import { IMAGE_PATHS } from "../../core/constants/image-paths";
 
 @Component({
   selector: "app-pokemon-card",
@@ -11,6 +12,10 @@ export class PokemonCardComponent implements OnInit {
   @Input() pokemon!: Pokemon;
   @Input() isFavorite: boolean = false;
   @Output() toggleFavorite: EventEmitter<Pokemon> = new EventEmitter();
+
+  // 🔹 圖片路徑
+  favoriteFilled = IMAGE_PATHS.FAVORITE_FILLED;
+  favoriteOutline = IMAGE_PATHS.FAVORITE_OOTLINE;
 
   constructor(private pokemonService: PokemonService) {}
 

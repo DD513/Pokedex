@@ -32,11 +32,7 @@
 
 <ng-template #noResults>
   <div class="no-results">
-    <img
-      src="/assets/images/NotFound.png"
-      alt="Pokemon Not Found"
-      class="no-results-img"
-    />
+    <img [src]="notFound" alt="Pokemon Not Found" class="no-results-img" />
     沒有尋找到寶可夢。<br />
     <span>用別的條件重新搜尋吧。</span>
   </div>

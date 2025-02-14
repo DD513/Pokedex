@@ -33,11 +33,7 @@
 
   <ng-template #loadingTemplate>
     <div class="loading-container">
-      <img
-        src="assets/images/loading-egg.png"
-        alt="Loading"
-        class="loading-icon"
-      />
+      <img [src]="loadingEgg" alt="Loading" class="loading-icon" />
       <p class="loading-text">寶可夢載入中...</p>
     </div>
   </ng-template>

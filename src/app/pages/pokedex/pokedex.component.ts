@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { Pokemon } from "../../core/models/pokemon.model";
 import { PokemonService } from "../../core/services/pokemon.service";
+import { IMAGE_PATHS } from "../../core/constants/image-paths";
+
 import { Subject, Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 
@@ -14,8 +16,10 @@ export class PokedexComponent implements OnInit {
   filteredPokemonList: Pokemon[] = [];
   showFavorites: boolean = false; // 🔹 是否只顯示收藏
   private favoriteSubscription!: Subscription;
-
   private searchSubject: Subject<string> = new Subject<string>(); // RxJS Subject
+
+  // 🔹 圖片路徑
+  notFound = IMAGE_PATHS.NOT_FOUND;
 
   constructor(
     private pokemonService: PokemonService,
