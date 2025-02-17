@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Pokemon } from "../../core/models/pokemon.model";
-import { PokemonService } from "../../core/services/pokemon.service";
-import { IMAGE_PATHS } from "../../core/constants/image-paths";
+import { Pokemon } from "../../../../core/models/pokemon.model";
+import { PokemonService } from "../../../../core/services/pokemon.service";
+import { IMAGE_PATHS } from "../../../../core/constants/image-paths";
 
 @Component({
   selector: "app-pokemon-card",
