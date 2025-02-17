@@ -6,10 +6,10 @@
   <div class="buttons">
     <button
       class="favorite-toggle"
-      [class.active]="showFavorites"
+      [class.active]="isShowingFavorites"
       (click)="toggleShowFavorites()"
     >
-      {{ showFavorites ? "顯示所有寶可夢" : "只顯示我的收藏" }}
+      {{ isShowingFavorites ? "顯示所有寶可夢" : "只顯示我的收藏" }}
     </button>
 
     <button class="clear-favorites" (click)="clearAllFavorites()">

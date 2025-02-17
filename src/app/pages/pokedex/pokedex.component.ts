@@ -14,7 +14,7 @@ import { debounceTime } from "rxjs/operators";
 export class PokedexComponent implements OnInit {
   pokemonList: Pokemon[] = [];
   filteredPokemonList: Pokemon[] = [];
-  showFavorites: boolean = false; // 🔹 是否只顯示收藏
+  isShowingFavorites: boolean = false; // 🔹 是否只顯示收藏
   searchQuery: string = ""; // 🔹 存放目前搜尋字串
   private favoriteSubscription!: Subscription;
   private searchSubject: Subject<string> = new Subject<string>(); // RxJS Subject
@@ -58,7 +58,7 @@ export class PokedexComponent implements OnInit {
 
   filterPokemon(): void {
     let result = this.pokemonService.searchPokemon(this.searchQuery);
-    if (this.showFavorites) {
+    if (this.isShowingFavorites) {
       result = result.filter((pokemon) => this.isFavorite(pokemon));
     }
     this.filteredPokemonList = result;
@@ -84,7 +84,7 @@ export class PokedexComponent implements OnInit {
   }
 
   toggleShowFavorites(): void {
-    this.showFavorites = !this.showFavorites;
+    this.isShowingFavorites = !this.isShowingFavorites;
     this.filterPokemon();
   }
 
