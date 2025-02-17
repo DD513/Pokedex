@@ -65,17 +65,20 @@ export class PokemonService {
 
   // 切換收藏狀態
   toggleFavorite(pokemon: Pokemon): void {
-    if (this.favoritePokemonCodes.has(pokemon.Code)) {
-      this.favoritePokemonCodes.delete(pokemon.Code);
-    } else {
-      this.favoritePokemonCodes.add(pokemon.Code);
-    }
-    localStorage.setItem(
-      "favoritePokemon",
-      JSON.stringify([...this.favoritePokemonCodes])
-    );
+    const isFavorite = this.favoritePokemonCodes.has(pokemon.Code);
+    isFavorite
+      ? this.favoritePokemonCodes.delete(pokemon.Code)
+      : this.favoritePokemonCodes.add(pokemon.Code);
 
-    // 發送更新通知
+    if (!isFavorite) {
+      localStorage.setItem(
+        "favoritePokemon",
+        JSON.stringify([...this.favoritePokemonCodes])
+      );
+    } else {
+      localStorage.removeItem("favoritePokemon"); // 🔹 若全部刪除則清空 localStorage
+    }
+
     this.favoritesSubject.next(this.favoritePokemonCodes);
   }
 

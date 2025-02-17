@@ -2,7 +2,12 @@
   <div class="favorite-icon" (click)="onToggleFavorite()">
     <img [src]="isFavorite ? favoriteFilled : favoriteOutline" alt="收藏" />
   </div>
-  <img [src]="pokemon.Img" [alt]="pokemon.EnglishName" class="pokemon-Img" />
+  <img
+    [src]="pokemon.Img"
+    [alt]="pokemon.EnglishName"
+    class="pokemon-Img"
+    loading="lazy"
+  />
   <h3 class="card-title">
     {{ pokemon.ChineseName }} ({{ pokemon.EnglishName }})
   </h3>
