@@ -6,10 +6,12 @@
   <div class="buttons">
     <button
       class="favorite-toggle"
-      [class.active]="isShowingFavorites"
+      [class.active]="viewMode === ViewMode.Favorites"
       (click)="toggleShowFavorites()"
     >
-      {{ isShowingFavorites ? "顯示所有寶可夢" : "只顯示我的收藏" }}
+      {{
+        viewMode === ViewMode.Favorites ? "顯示所有寶可夢" : "只顯示我的收藏"
+      }}
     </button>
 
     <button class="clear-favorites" (click)="clearAllFavorites()">

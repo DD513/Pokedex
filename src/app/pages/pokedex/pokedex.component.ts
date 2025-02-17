@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { Pokemon } from "../../core/models/pokemon.model";
 import { PokemonService } from "../../core/services/pokemon.service";
 import { IMAGE_PATHS } from "../../core/constants/image-paths";
+import { ViewMode } from "../../core/constants/enums/view-mode.enum";
 
 import { Subject, Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
@@ -14,7 +15,8 @@ import { debounceTime } from "rxjs/operators";
 export class PokedexComponent implements OnInit {
   pokemonList: Pokemon[] = [];
   filteredPokemonList: Pokemon[] = [];
-  isShowingFavorites: boolean = false; // 🔹 是否只顯示收藏
+  viewMode: ViewMode = ViewMode.All; // 預設為 `ALL`
+  ViewMode = ViewMode; // ✅ 這樣 HTML 才能讀取 `ViewMode.Favorites`
   searchQuery: string = ""; // 🔹 存放目前搜尋字串
   private favoriteSubscription!: Subscription;
   private searchSubject: Subject<string> = new Subject<string>(); // RxJS Subject
@@ -58,7 +60,7 @@ export class PokedexComponent implements OnInit {
 
   filterPokemon(): void {
     let result = this.pokemonService.searchPokemon(this.searchQuery);
-    if (this.isShowingFavorites) {
+    if (this.viewMode === ViewMode.Favorites) {
       result = result.filter((pokemon) => this.isFavorite(pokemon));
     }
     this.filteredPokemonList = result;
@@ -84,7 +86,8 @@ export class PokedexComponent implements OnInit {
   }
 
   toggleShowFavorites(): void {
-    this.isShowingFavorites = !this.isShowingFavorites;
+    this.viewMode =
+      this.viewMode === ViewMode.All ? ViewMode.Favorites : ViewMode.All;
     this.filterPokemon();
   }
 
