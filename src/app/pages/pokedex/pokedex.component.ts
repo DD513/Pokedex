@@ -57,7 +57,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
    */
   updateFilteredPokemonList(): void {
     let result = this.pokemonService.searchPokemon(this.searchQuery);
-    if (this.currentViewMode === ViewMode.Favorites) {
+    if (this.currentViewMode === this.viewModeEnum.Favorites) {
       result = result.filter((pokemon) => this.isInFavorites(pokemon));
     }
     this.filteredPokemonList = result;
