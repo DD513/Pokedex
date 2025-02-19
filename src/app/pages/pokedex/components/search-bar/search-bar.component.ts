@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
+import { Subject } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: "pokedex-search-bar",
@@ -8,16 +10,24 @@ import { Component, EventEmitter, Output } from "@angular/core";
 export class PokedexSearchBarComponent {
   searchQuery: string = "";
   isComposing: boolean = false; // 追蹤中文組字狀態
+  private querySubject: Subject<string> = new Subject<string>(); // RxJS Subject
 
-  @Output() search: EventEmitter<string> = new EventEmitter<string>();
+  @Output() queryChange: EventEmitter<string> = new EventEmitter<string>();
 
-  onSearch(): void {
-    if (this.isComposing) return;
-    this.search.emit(this.searchQuery); // 發送搜尋事件
+  constructor() {
+    // 訂閱防抖搜尋事件
+    this.querySubject.pipe(debounceTime(300)).subscribe((query) => {
+      this.queryChange.emit(query);
+    });
   }
 
-  onCompositionEnd(): void {
+  handleInputChange(): void {
+    if (this.isComposing) return;
+    this.querySubject.next(this.searchQuery); // ✅ 觸發防抖處理
+  }
+
+  handleCompositionEnd(): void {
     this.isComposing = false;
-    this.search.emit(this.searchQuery);
+    this.querySubject.next(this.searchQuery);
   }
 }

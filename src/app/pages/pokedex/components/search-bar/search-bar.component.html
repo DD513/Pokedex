@@ -4,8 +4,8 @@
     placeholder="搜尋寶可夢..."
     class="search-box"
     [(ngModel)]="searchQuery"
-    (input)="onSearch()"
+    (input)="handleInputChange()"
     (compositionstart)="isComposing = true"
-    (compositionend)="onCompositionEnd()"
+    (compositionend)="handleCompositionEnd()"
   />
 </div>
