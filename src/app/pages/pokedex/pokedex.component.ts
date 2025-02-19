@@ -10,13 +10,13 @@ import { Subscription } from "rxjs";
   templateUrl: "./pokedex.component.html",
   styleUrls: ["./pokedex.component.css"],
 })
-export class PokedexComponent implements OnInit {
+export class PokedexComponent implements OnInit, OnDestroy {
   pokemonList: Pokemon[] = [];
   filteredPokemonList: Pokemon[] = [];
-  viewMode: ViewMode = ViewMode.All; // 預設為 `ALL`
-  ViewMode = ViewMode; // ✅ 這樣 HTML 才能讀取 `ViewMode.Favorites`
+  currentViewMode: ViewMode = ViewMode.All; // 🔹 當前的視圖模式
+  viewModeEnum = ViewMode; // 🔹 讓 HTML 可存取 `viewModeEnum.Favorites`
   searchQuery: string = ""; // 🔹 存放目前搜尋字串
-  private favoriteSubscription!: Subscription;
+  private favoriteSubscription!: Subscription; // 訂閱 (subscribe) PokemonService 的收藏變化 (getFavoritesObservable())
 
   // 🔹 圖片路徑
   notFound = IMAGE_PATHS.NOT_FOUND;
@@ -34,7 +34,7 @@ export class PokedexComponent implements OnInit {
     this.favoriteSubscription = this.pokemonService
       .getFavoritesObservable()
       .subscribe(() => {
-        this.filterPokemon();
+        this.updateFilteredPokemonList();
       });
   }
 
@@ -44,24 +44,36 @@ export class PokedexComponent implements OnInit {
     }
   }
 
-  onSearch(query: string): void {
+  /**
+   *  更新搜尋條件，並重新篩選寶可夢
+   */
+  updateSearchQuery(query: string): void {
     this.searchQuery = query;
-    this.filterPokemon();
+    this.updateFilteredPokemonList();
   }
 
-  filterPokemon(): void {
+  /**
+   *  根據搜尋條件與收藏狀態，更新篩選後的寶可夢列表
+   */
+  updateFilteredPokemonList(): void {
     let result = this.pokemonService.searchPokemon(this.searchQuery);
-    if (this.viewMode === ViewMode.Favorites) {
-      result = result.filter((pokemon) => this.isFavorite(pokemon));
+    if (this.currentViewMode === ViewMode.Favorites) {
+      result = result.filter((pokemon) => this.isInFavorites(pokemon));
     }
     this.filteredPokemonList = result;
     this.cdr.detectChanges();
   }
 
-  isFavorite(pokemon: Pokemon): boolean {
-    return this.pokemonService.isFavorite(pokemon);
+  /**
+   * 確認寶可夢是否在收藏清單中
+   */
+  isInFavorites(pokemon: Pokemon): boolean {
+    return this.pokemonService.checkIsFavorite(pokemon);
   }
 
+  /**
+   * 收藏 / 取消收藏某隻寶可夢
+   */
   toggleFavorite(pokemon: Pokemon): void {
     this.pokemonService.toggleFavorite(pokemon);
     // 🔹 直接更新 `filteredPokemonList`，不重新執行 `filterPokemon()`，避免畫面跳動
@@ -75,14 +87,22 @@ export class PokedexComponent implements OnInit {
     }
   }
 
-  toggleShowFavorites(): void {
-    this.viewMode =
-      this.viewMode === ViewMode.All ? ViewMode.Favorites : ViewMode.All;
-    this.filterPokemon();
+  /**
+   *  切換顯示模式
+   */
+  toggleViewMode(): void {
+    this.currentViewMode =
+      this.currentViewMode === this.viewModeEnum.All
+        ? this.viewModeEnum.Favorites
+        : this.viewModeEnum.All;
+    this.updateFilteredPokemonList();
   }
 
+  /**
+   *  清空所有收藏寶可夢
+   */
   clearAllFavorites(): void {
     this.pokemonService.clearFavorites();
-    this.filterPokemon();
+    this.updateFilteredPokemonList();
   }
 }

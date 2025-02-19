@@ -5,7 +5,7 @@ import {
   PokemonType,
   PokemonTypeColors,
 } from "../constants/enums/pokemon-type.enum";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -57,13 +57,13 @@ export class PokemonService {
         this.favoritesSubject.next(this.favoritePokemonCodes);
       } catch (error) {
         console.error("無法解析收藏紀錄", error);
-        this.favoritePokemonCodes = new Set();
+        this.favoritePokemonCodes.clear();
       }
     }
   }
 
   // 檢查是否已收藏
-  isFavorite(pokemon: Pokemon): boolean {
+  checkIsFavorite(pokemon: Pokemon): boolean {
     return this.favoritePokemonCodes.has(pokemon.Code);
   }
 
@@ -94,7 +94,7 @@ export class PokemonService {
   }
 
   // 監聽收藏狀態變化
-  getFavoritesObservable() {
+  getFavoritesObservable(): Observable<Set<string>> {
     return this.favoritesSubject.asObservable();
   }
 

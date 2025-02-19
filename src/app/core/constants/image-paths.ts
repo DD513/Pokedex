@@ -8,7 +8,7 @@ export const IMAGE_PATHS = {
 
   // Pokedex
   FAVORITE_FILLED: "assets/images/favorite-filled.png",
-  FAVORITE_OOTLINE: "assets/images/favorite-outline.png",
+  FAVORITE_OUTLINE: "assets/images/favorite-outline.png",
   NOT_FOUND: "assets/images/not-found.png",
 
   // loading
