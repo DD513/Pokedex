@@ -13,4 +13,7 @@ export const IMAGE_PATHS = {
 
   // loading
   LOADING_EGG: "assets/images/loading-egg.png",
+
+  // travel-food
+  NO_TRAVEL_FOOD: "assets/images/no-travel-food.png",
 };

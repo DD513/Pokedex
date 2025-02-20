@@ -2,28 +2,10 @@
   <h1 class="title">旅遊美食推薦</h1>
 
   <div class="grid-container">
-    <a
-      *ngFor="let item of travelFoodData"
-      [href]="item.Url"
-      target="_blank"
-      class="shadow-card"
-    >
-      <img
-        *ngIf="item.PicURL"
-        [src]="item.PicURL"
-        alt="{{ item.Name }}"
-        class="card-img"
-      />
-
-      <div class="shadow-content">
-        <h2 class="card-title">{{ item.Name }}</h2>
-        <p class="card-text"><strong>地址：</strong>{{ item.Address }}</p>
-        <p class="card-text"><strong>電話：</strong>{{ item.Tel }}</p>
-
-        <div class="btn-container">
-          <span class="btn">查看詳情</span>
-        </div>
-      </div>
-    </a>
+    <app-travel-food-card
+      *ngFor="let item of travelFoodList"
+      [travelFoodItem]="item"
+      [fallbackImage]="fallbackImage"
+    ></app-travel-food-card>
   </div>
 </div>

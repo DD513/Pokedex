@@ -1,0 +1,29 @@
+<a
+  *ngIf="travelFoodItem.Url; else noUrlCard"
+  [href]="travelFoodItem.Url"
+  target="_blank"
+  class="shadow-card"
+>
+  <ng-container *ngTemplateOutlet="cardContent"></ng-container>
+</a>
+
+<!-- 如果沒有 URL，則顯示不可點擊的卡片 -->
+<ng-template #noUrlCard>
+  <div class="shadow-card disabled">
+    <ng-container *ngTemplateOutlet="cardContent"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #cardContent>
+  <img [src]="foodImage" [alt]="travelFoodItem.Name" class="card-img" />
+
+  <div class="shadow-content">
+    <h2 class="card-title">{{ travelFoodItem.Name }}</h2>
+    <p class="card-text"><strong>地址：</strong>{{ travelFoodItem.Address }}</p>
+    <p class="card-text"><strong>電話：</strong>{{ travelFoodItem.Tel }}</p>
+
+    <div class="btn-container" *ngIf="travelFoodItem.Url">
+      <span class="btn">查看詳情</span>
+    </div>
+  </div>
+</ng-template>

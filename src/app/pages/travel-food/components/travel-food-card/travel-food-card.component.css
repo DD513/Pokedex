@@ -1,0 +1,135 @@
+/* 🏆 Card 基礎樣式 */
+.shadow-card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 400px;
+  height: auto;
+  position: relative;
+  border: 2px solid transparent;
+  text-decoration: none; /* ✅ 移除超連結底線 */
+  color: inherit; /* ✅ 確保文字顏色繼承，不變成藍色 */
+
+  /* ✅ Hover 效果 - 使用玻璃霧面風格 */
+  &:hover {
+    background: rgba(44, 62, 80, 0.8); /* 高級藍紫色透明效果 */
+    backdrop-filter: blur(10px); /* 玻璃霧面效果 */
+    color: white;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(44, 62, 80, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  &:hover .card-title,
+  &:hover .card-text {
+    color: white; /* 文字變白，保持對比 */
+  }
+
+  &:hover .btn {
+    background: linear-gradient(90deg, #6a5acd, #8a2be2); /* 按鈕流光漸變 */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.5);
+  }
+}
+
+.shadow-card.disabled {
+  pointer-events: none;
+  opacity: 0.8;
+  cursor: default;
+}
+
+/* 🎨 圖片樣式 */
+.card-img {
+  width: 100%;
+  max-width: 200px;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* 📌 內容區域 */
+.shadow-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #2c3e50; /* 深藍灰色 */
+  transition: color 0.3s ease-in-out;
+}
+
+.card-text {
+  font-size: 16px;
+  margin: 4px 0;
+  color: #555;
+  transition: color 0.3s ease-in-out;
+}
+
+/* 🚀 按鈕浮起來，Hover 有流光效果 */
+.btn {
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #6a5acd, #8a2be2);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  position: relative;
+
+  &:hover {
+    background: linear-gradient(90deg, #483d8b, #4b0082);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(75, 0, 130, 0.5);
+  }
+}
+
+/* 📱 響應式調整 */
+@media (max-width: 1024px) {
+  .shadow-card {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .shadow-card {
+    min-height: 360px;
+  }
+
+  .card-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shadow-card {
+    min-height: 380px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}

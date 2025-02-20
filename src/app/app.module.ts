@@ -11,6 +11,7 @@ import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
 import { LayoutComponent } from "./components/layout/layout.component";
 import { NavbarComponent } from "./components/layout/navbar/navbar.component";
 import { FooterComponent } from "./components/layout/footer/footer.component";
+import { TravelFoodCardComponent } from './pages/travel-food/components/travel-food-card/travel-food-card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FooterComponent } from "./components/layout/footer/footer.component";
     LayoutComponent,
     NavbarComponent,
     FooterComponent,
+    TravelFoodCardComponent,
   ],
   imports: [
     BrowserModule,
