@@ -40,6 +40,11 @@ const routes: Routes = [
   //     { path: "dashboard", loadChildren: "./pages/admin/dashboard.module#DashboardModule" },
   //   ],
   // },
+  {
+    path: "404",
+    loadChildren: "./pages/not-found/not-found.module#NotFoundModule",
+  },
+  { path: "**", redirectTo: "/404" }, // 🚀 這裡捕捉所有未匹配的路由
 ];
 
 @NgModule({
