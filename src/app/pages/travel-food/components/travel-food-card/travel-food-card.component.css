@@ -10,33 +10,82 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-height: 400px;
+  min-height: 360px;
   height: auto;
   position: relative;
   border: 2px solid transparent;
-  text-decoration: none; /* ✅ 移除超連結底線 */
+  text-decoration: none;
   color: inherit; /* ✅ 確保文字顏色繼承，不變成藍色 */
+  overflow: hidden;
 
   /* ✅ Hover 效果 - 使用玻璃霧面風格 */
   &:hover {
-    background: rgba(44, 62, 80, 0.8); /* 高級藍紫色透明效果 */
-    backdrop-filter: blur(10px); /* 玻璃霧面效果 */
+    backdrop-filter: blur(12px); /* 玻璃霧面效果 */
+    background: rgba(58, 72, 96, 0.7); /* 深色漸變 */
     color: white;
     transform: translateY(-8px);
     box-shadow: 0 12px 24px rgba(44, 62, 80, 0.4);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: #fdca40;
+
+    &::after {
+      opacity: 1;
+    }
+    &::before {
+      opacity: 1;
+    }
+    .card-title,
+    .card-text {
+      color: white;
+    }
   }
 
-  &:hover .card-title,
-  &:hover .card-text {
-    color: white; /* 文字變白，保持對比 */
+  /* 🔹 霧化效果：當 hover 時加上半透明霧化背景 */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
   }
 
-  &:hover .btn {
-    background: linear-gradient(90deg, #6a5acd, #8a2be2); /* 按鈕流光漸變 */
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.5);
+  /* 🔹 Glow 發光效果 */
+  &::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    /* background: linear-gradient(90deg, #eeccff, #ff99ff); */
+    background: linear-gradient(90deg, #fecf4b, #f5e663);
+    opacity: 0;
+    border-radius: 15px;
+    transition: opacity 0.3s ease-in-out;
+    z-index: -1;
   }
+}
+
+/* 🔹 查看詳情按鈕，預設隱藏 */
+.shadow-card .hover-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 2;
+}
+
+/* 🔹 當 hover 時，顯示 "查看詳情" */
+.shadow-card:hover .hover-text {
+  opacity: 1;
 }
 
 .shadow-card.disabled {
@@ -83,27 +132,6 @@
   margin: 4px 0;
   color: #555;
   transition: color 0.3s ease-in-out;
-}
-
-/* 🚀 按鈕浮起來，Hover 有流光效果 */
-.btn {
-  padding: 10px 20px;
-  background: linear-gradient(90deg, #6a5acd, #8a2be2);
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-  z-index: 2;
-  position: relative;
-
-  &:hover {
-    background: linear-gradient(90deg, #483d8b, #4b0082);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(75, 0, 130, 0.5);
-  }
 }
 
 /* 📱 響應式調整 */

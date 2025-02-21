@@ -5,14 +5,37 @@
   padding: 20px;
 }
 
+@keyframes chew {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1, 0.9);
+  }
+  50% {
+    transform: scale(0.9, 1.1);
+  }
+  75% {
+    transform: scale(1.1, 0.9);
+  }
+}
+
 .title {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: bold;
-  margin-bottom: 60px;
+  color: #1d3354;
+  text-align: center;
+}
+
+.chew {
+  display: inline-block;
+  animation: chew 1.2s infinite;
 }
 
 /* 🏗 使用 Grid 來排列卡片 */
 .grid-container {
+  margin: 60px auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
