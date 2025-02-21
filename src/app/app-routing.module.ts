@@ -1,15 +1,16 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { PokedexComponent } from "./pages/pokedex/pokedex.component";
-import { PokelotteryComponent } from "./pages/pokelottery/pokelottery.component";
 import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
 
-import { LayoutComponent } from "./components/layout/layout.component";
+// 不同的 Layout
+import { PokemonLayoutComponent } from "./components/layout/pokemon-layout/pokemon-layout.component";
+// import { AuthLayoutComponent } from "./components/layout/auth-layout/auth-layout.component";
+// import { AdminLayoutComponent } from "./components/layout/admin-layout/admin-layout.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: LayoutComponent, // 讓所有子路由都包在 LayoutComponent 裡
+    component: PokemonLayoutComponent,
     children: [
       { path: "", redirectTo: "/pokedex", pathMatch: "full" },
       {
@@ -24,6 +25,21 @@ const routes: Routes = [
       { path: "travel-food", component: TravelFoodComponent },
     ],
   },
+  // {
+  //   path: "auth",
+  //   component: AuthLayoutComponent,
+  //   children: [
+  //     { path: "login", loadChildren: "./pages/auth/login.module#LoginModule" },
+  //     { path: "register", loadChildren: "./pages/auth/register.module#RegisterModule" },
+  //   ],
+  // },
+  // {
+  //   path: "admin",
+  //   component: AdminLayoutComponent,
+  //   children: [
+  //     { path: "dashboard", loadChildren: "./pages/admin/dashboard.module#DashboardModule" },
+  //   ],
+  // },
 ];
 
 @NgModule({
