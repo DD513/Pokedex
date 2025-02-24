@@ -13,11 +13,4 @@ export class TravelFoodCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
-  get foodImage(): string {
-    return this.travelFoodItem.PicURL &&
-      this.travelFoodItem.PicURL !== "Not Found"
-      ? this.travelFoodItem.PicURL
-      : this.fallbackImage;
-  }
 }

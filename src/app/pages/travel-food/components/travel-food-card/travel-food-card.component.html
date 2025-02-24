@@ -16,7 +16,11 @@
 </ng-template>
 
 <ng-template #cardContent>
-  <img [src]="foodImage" [alt]="travelFoodItem.Name" class="card-img" />
+  <img
+    [src]="travelFoodItem.PicURL ? travelFoodItem.PicURL : fallbackImage"
+    [alt]="travelFoodItem.Name"
+    class="card-img"
+  />
 
   <div class="shadow-content">
     <h2 class="card-title">{{ travelFoodItem.Name }}</h2>

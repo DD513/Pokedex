@@ -49,7 +49,7 @@ export class TravelFood {
     this.FoodFeature = data.FoodFeature || "";
     this.City = data.City || "";
     this.Town = data.Town || "";
-    this.PicURL = data.PicURL || "Not Found";
+    this.PicURL = data.PicURL || "";
     this.Latitude = parseFloat(String(data.Latitude)) || 0; // 轉換成 number
     this.Longitude = parseFloat(String(data.Longitude)) || 0;
     this.BlogUrl = data.BlogUrl || "";

@@ -31,7 +31,7 @@
   <app-pokemon-card
     *ngFor="let pokemon of filteredPokemonList"
     [pokemon]="pokemon"
-    [isFavorite]="isInFavorites(pokemon)"
+    [isFavorite]="checkIsInFavorites(pokemon)"
     (toggleFavorite)="toggleFavorite($event)"
   ></app-pokemon-card>
 </div>

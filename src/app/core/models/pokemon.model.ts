@@ -2,6 +2,10 @@ export interface PokemonType {
   Name: string; // 類型名稱，如 "草"、"火"
 }
 
+export interface PokemonAbilities {
+  Name: string; // 特性名稱，如 "同步"、"免疫"
+}
+
 export interface Pokemon {
   Code: string; // 編號
   Category: string; // 類別
@@ -12,4 +16,5 @@ export interface Pokemon {
   Types: PokemonType[]; // 類型陣列
   Height: string; // 高度
   Weight: string; // 重量
+  Abilities: PokemonAbilities[]; // 特性陣列
 }

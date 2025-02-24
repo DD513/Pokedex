@@ -16,7 +16,7 @@ export class TravelFoodComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getTravelFoodData().subscribe((data) => {
-      this.travelFoodList = data.map((item: any) => new TravelFood(item)); // ✅ 轉換成 TravelFood 類別
+      this.travelFoodList = data;
     });
   }
 }

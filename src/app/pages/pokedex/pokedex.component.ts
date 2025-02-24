@@ -29,6 +29,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pokemonList = this.pokemonService.getAllPokemon();
     this.filteredPokemonList = [...this.pokemonList];
+    console.log(this.filteredPokemonList);
 
     // 訂閱收藏狀態變化，當收藏變化時自動更新 UI
     this.favoriteSubscription = this.pokemonService
@@ -58,7 +59,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
   updateFilteredPokemonList(): void {
     let result = this.pokemonService.searchPokemon(this.searchQuery);
     if (this.currentViewMode === this.viewModeEnum.Favorites) {
-      result = result.filter((pokemon) => this.isInFavorites(pokemon));
+      result = result.filter((pokemon) => this.checkIsInFavorites(pokemon));
     }
     this.filteredPokemonList = result;
     this.cdr.detectChanges();
@@ -67,7 +68,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
   /**
    * 確認寶可夢是否在收藏清單中
    */
-  isInFavorites(pokemon: Pokemon): boolean {
+  checkIsInFavorites(pokemon: Pokemon): boolean {
     return this.pokemonService.checkIsFavorite(pokemon);
   }
 
