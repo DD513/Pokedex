@@ -8,7 +8,11 @@ import { IMAGE_PATHS } from "../../../../core/constants/image-paths";
 })
 export class PokemonNavbarComponent implements OnInit {
   // 🔹 圖片路徑
-  homePageLoge = IMAGE_PATHS.HOME_PAGE_LOGO;
+  homePageLogo = IMAGE_PATHS.HOME_PAGE_LOGO;
+  pokedexLogo = IMAGE_PATHS.HOME_POKEDEX_LOGO;
+  pokeLotteryLogo = IMAGE_PATHS.HOME_POKELOTTERY_LOGO;
+  pokemonDictionaryLogo = IMAGE_PATHS.HOME_POKEMON_DICTIONARY_LOGO;
+
   constructor() {}
 
   ngOnInit() {}

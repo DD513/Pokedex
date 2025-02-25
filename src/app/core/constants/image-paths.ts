@@ -5,6 +5,9 @@ export const IMAGE_PATHS = {
 
   // Home
   HOME_PAGE_LOGO: "assets/images/homepage-logo.png",
+  HOME_POKEDEX_LOGO: "assets/images/pokedex-nav-logo.png",
+  HOME_POKELOTTERY_LOGO: "assets/images/pokelottery-nav-logo.png",
+  HOME_POKEMON_DICTIONARY_LOGO: "assets/images/pokemon-dictionary-nav-logo.png",
 
   // Pokedex
   FAVORITE_FILLED: "assets/images/favorite-filled.png",

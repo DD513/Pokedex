@@ -1,14 +1,33 @@
 <nav>
   <div>
     <a routerLink="/" routerLinkActive="active" class="logo">
-      <img [src]="homePageLoge" alt="Pokemon Logo" />
+      <img [src]="homePageLogo" alt="Pokemon Logo" />
       <span class="logo-text">Pokemon</span>
     </a>
   </div>
+
   <ul>
-    <li><a routerLink="/pokedex" routerLinkActive="active">寶可夢圖鑑</a></li>
     <li>
-      <a routerLink="/pokelottery" routerLinkActive="active">寶可夢抽抽樂</a>
+      <a routerLink="/pokedex" routerLinkActive="active">
+        <img [src]="pokedexLogo" alt="Pokedex Logo" class="menu-icon" />
+        寶可夢圖鑑
+      </a>
+    </li>
+    <li>
+      <a routerLink="/pokelottery" routerLinkActive="active">
+        <img [src]="pokeLotteryLogo" alt="Pokelottery Logo" class="menu-icon" />
+        寶可夢抽抽樂
+      </a>
+    </li>
+    <li>
+      <a routerLink="/pokemon-dictionary" routerLinkActive="active">
+        <img
+          [src]="pokemonDictionaryLogo"
+          alt="Dictionary Icon"
+          class="menu-icon"
+        />
+        寶可夢字典
+      </a>
     </li>
   </ul>
 </nav>

@@ -58,10 +58,15 @@ nav ul {
 }
 
 nav ul li {
-  margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 nav ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   color: #ffffff;
   text-decoration: none;
   font-size: 1.2rem;
@@ -70,9 +75,22 @@ nav ul li a {
   white-space: nowrap;
   transition: background 0.3s ease, color 0.3s ease;
   border-radius: 5px;
+  min-width: 140px;
+  text-align: center;
+}
+
+.menu-icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 8px; /* 確保圖示和文字有間距 */
+  transition: transform 0.2s ease-in-out;
 }
 
 nav ul li a:hover {
   background-color: #ffcb05; /* 黃色背景 */
   color: #333333; /* 深色文字 */
+}
+
+nav ul li a:hover .menu-icon {
+  transform: scale(1.2);
 }
