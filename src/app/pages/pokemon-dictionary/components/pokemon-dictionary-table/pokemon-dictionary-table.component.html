@@ -1,0 +1,32 @@
+<div class="pokemon-table-container">
+  <table class="pokemon-table">
+    <thead>
+      <tr>
+        <th>圖片</th>
+        <th>英文</th>
+        <th>繁體中文</th>
+        <th>簡體中文</th>
+        <th>韓文</th>
+        <th>日文</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pokemon of pokemonList">
+        <td>
+          <img
+            [src]="pokemon.img"
+            [alt]="pokemon.englishName"
+            class="pokemon-img"
+          />
+        </td>
+        <td class="english-name">{{ pokemon.englishName }}</td>
+        <td class="chinese-name">{{ pokemon.chineseName }}</td>
+        <td class="simplified-chinese-name">
+          {{ pokemon.simplifiedChineseName }}
+        </td>
+        <td class="korean-name">{{ pokemon.koreanName }}</td>
+        <td class="japanese-name">{{ pokemon.japaneseName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

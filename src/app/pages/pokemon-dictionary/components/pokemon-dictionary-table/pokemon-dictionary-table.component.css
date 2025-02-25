@@ -1,0 +1,86 @@
+.pokemon-table-container {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.pokemon-table {
+  width: 100%;
+  margin: 20px;
+  border-collapse: collapse;
+  background: #f8f9fa;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pokemon-table th {
+  background: linear-gradient(70deg, #ffcc00, #ff9900);
+  color: white;
+  padding: 12px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pokemon-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+}
+
+.pokemon-img {
+  width: 72px;
+  height: 72px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.pokemon-img:hover {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.pokemon-table tr:hover {
+  background: rgba(255, 204, 0, 0.2);
+  transition: background 0.3s ease-in-out;
+}
+
+.english-name {
+  color: #0073e6;
+  font-weight: bold;
+}
+
+.chinese-name {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+.simplified-chinese-name {
+  color: #605f5f;
+  font-weight: bold;
+}
+
+.korean-name {
+  color: #388e3c;
+  font-weight: bold;
+}
+
+.japanese-name {
+  color: #ff6f00;
+  font-weight: bold;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pokemon-table tr {
+  animation: slideIn 0.5s ease-in-out;
+}

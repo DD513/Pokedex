@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { PokemonService } from "../../core/services/pokemon.service";
 import { PokemonDictionaryEntry } from "../../core/models/pokemon-dictionary.model";
 
 @Component({
@@ -11,7 +12,10 @@ export class PokemonDictionaryComponent implements OnInit {
   filteredPokemonList: PokemonDictionaryEntry[] = [];
   searchQuery: string = "";
 
-  constructor() {}
+  constructor(
+    private pokemonService: PokemonService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadPokemonData();
@@ -40,12 +44,24 @@ export class PokemonDictionaryComponent implements OnInit {
     this.filteredPokemonList = [...this.pokemonList];
   }
 
-  onSearch(): void {
-    const query = this.searchQuery.toLowerCase().trim();
+  updateSearchQuery(query: string): void {
+    this.searchQuery = query;
+    this.updateFilteredPokemonDictionaryList();
+  }
+
+  updateFilteredPokemonDictionaryList(): void {
+    const lowerSearchQuery = this.searchQuery.toLowerCase().trim();
+
     this.filteredPokemonList = this.pokemonList.filter((pokemon) =>
-      Object.values(pokemon).some((value) =>
-        value.toLowerCase().includes(query)
-      )
+      [
+        pokemon.englishName,
+        pokemon.chineseName,
+        pokemon.simplifiedChineseName,
+        pokemon.koreanName,
+        pokemon.japaneseName,
+      ].some((value) => value.toLowerCase().includes(lowerSearchQuery))
     );
+
+    this.cdr.detectChanges();
   }
 }

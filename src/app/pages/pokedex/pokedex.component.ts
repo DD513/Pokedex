@@ -29,7 +29,6 @@ export class PokedexComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pokemonList = this.pokemonService.getAllPokemon();
     this.filteredPokemonList = [...this.pokemonList];
-    console.log(this.filteredPokemonList);
 
     // 訂閱收藏狀態變化，當收藏變化時自動更新 UI
     this.favoriteSubscription = this.pokemonService

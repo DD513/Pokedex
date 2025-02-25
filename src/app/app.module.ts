@@ -8,7 +8,6 @@ import { AppComponent } from "./app.component";
 import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
 import { PokemonLayoutModule } from "./components/layout/pokemon-layout/pokemon-layout.module";
 import { TravelFoodCardComponent } from "./pages/travel-food/components/travel-food-card/travel-food-card.component";
-import { PokemonDictionaryModule } from './pages/pokemon-dictionary/pokemon-dictionary.module';
 
 @NgModule({
   declarations: [AppComponent, TravelFoodComponent, TravelFoodCardComponent],
@@ -20,8 +19,6 @@ import { PokemonDictionaryModule } from './pages/pokemon-dictionary/pokemon-dict
 
     // Shared Layout Module
     PokemonLayoutModule,
-
-    PokemonDictionaryModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
