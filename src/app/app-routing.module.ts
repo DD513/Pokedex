@@ -22,6 +22,11 @@ const routes: Routes = [
         loadChildren:
           "./pages/pokelottery/pokelottery.module#PokelotteryModule",
       },
+      {
+        path: "pokemon-dictionary",
+        loadChildren:
+          "./pages/pokemon-dictionary/pokemon-dictionary.module#PokemonDictionaryModule",
+      },
       { path: "travel-food", component: TravelFoodComponent },
     ],
   },

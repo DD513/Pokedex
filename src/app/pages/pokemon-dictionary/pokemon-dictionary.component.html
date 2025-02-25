@@ -1,0 +1,34 @@
+<div class="container">
+  <h1 class="title">寶可夢多語名稱對照表</h1>
+
+  <input
+    type="text"
+    class="search-box"
+    [(ngModel)]="searchQuery"
+    (input)="onSearch()"
+    placeholder="搜尋寶可夢名稱..."
+  />
+
+  <table class="pokemon-table">
+    <thead>
+      <tr>
+        <th>圖片</th>
+        <th>英文</th>
+        <th>繁體中文</th>
+        <th>簡體中文</th>
+        <th>韓文</th>
+        <th>日文</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pokemon of filteredPokemonList">
+        <td><img [src]="pokemon.img" [alt]="pokemon.englishName" /></td>
+        <td>{{ pokemon.englishName }}</td>
+        <td>{{ pokemon.chineseName }}</td>
+        <td>{{ pokemon.simplifiedChineseName }}</td>
+        <td>{{ pokemon.koreanName }}</td>
+        <td>{{ pokemon.japaneseName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
