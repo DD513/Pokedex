@@ -8,8 +8,7 @@ import { PokemonDictionaryEntry } from "../../core/models/pokemon-dictionary.mod
   styleUrls: ["./pokemon-dictionary.component.css"],
 })
 export class PokemonDictionaryComponent implements OnInit {
-  pokemonDictionaryList: any[] = [];
-  pokemonList: PokemonDictionaryEntry[] = [];
+  pokemonDictionaryList: PokemonDictionaryEntry[] = [];
   filteredPokemonList: PokemonDictionaryEntry[] = [];
   searchQuery: string = "";
 
@@ -59,7 +58,7 @@ export class PokemonDictionaryComponent implements OnInit {
   // 取得每隻寶可夢的多語言分類名稱
   getPokemonGeneraNames(): void {
     this.pokemonService
-      .getPokemonGeneraNames(this.pokemonDictionaryList)
+      .getPokemonNames(this.pokemonDictionaryList)
       .subscribe((updatedList) => {
         this.pokemonDictionaryList = updatedList;
         console.log("完整的寶可夢資料:", this.pokemonDictionaryList);
@@ -79,7 +78,7 @@ export class PokemonDictionaryComponent implements OnInit {
     this.filteredPokemonList = this.pokemonDictionaryList.filter((pokemon) =>
       [
         pokemon.names.englishName,
-        pokemon.names.chineseName,
+        pokemon.names.traditionalChineseName,
         pokemon.names.simplifiedChineseName,
         pokemon.names.koreanName,
         pokemon.names.japaneseName,

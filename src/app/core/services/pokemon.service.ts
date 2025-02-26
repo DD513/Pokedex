@@ -1,5 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Pokemon } from "../models/pokemon.model";
+import {
+  PokemonDictionaryEntry,
+  PokemonDictionaryUrlResponse,
+} from "../models/pokemon-dictionary.model";
 import { POKEMON_DATA } from "../data/pokemon.data";
 import { ApiService } from "./api.service";
 import {
@@ -115,21 +119,25 @@ export class PokemonService {
   }
 
   // 取得寶可夢字典的URL列表
-  getPokemonDictionaryUrlList(limit: number = 10): Observable<any> {
+  getPokemonDictionaryUrlList(
+    limit: number = 10
+  ): Observable<PokemonDictionaryUrlResponse> {
     return this.apiService.getPokemonUrlList(limit);
   }
 
   // 取得寶可夢物種和圖片
   getPokemonSpeciesAndSprites(
-    pokemonDictionaryResultList: any[]
-  ): Observable<any[]> {
+    pokemonDictionaryResultList: PokemonDictionaryEntry[]
+  ): Observable<PokemonDictionaryEntry[]> {
     return this.apiService.getPokemonSpeciesAndSprites(
       pokemonDictionaryResultList
     );
   }
 
   // 取得寶可夢的多語言分類名稱
-  getPokemonGeneraNames(pokemonDictionaryList: any[]): Observable<any[]> {
-    return this.apiService.getPokemonGeneraNames(pokemonDictionaryList);
+  getPokemonNames(
+    pokemonDictionaryList: PokemonDictionaryEntry[]
+  ): Observable<PokemonDictionaryEntry[]> {
+    return this.apiService.getPokemonNames(pokemonDictionaryList);
   }
 }

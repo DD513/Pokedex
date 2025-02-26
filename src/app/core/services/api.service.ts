@@ -6,7 +6,10 @@ import { map } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
 import { API_ROUTES } from "../constants/api-route";
 import { TravelFood } from "../models/travel-food.model";
-import { PokemonDictionaryEntry } from "../models/pokemon-dictionary.model";
+import {
+  PokemonDictionaryUrlResponse,
+  PokemonDictionaryEntry,
+} from "../models/pokemon-dictionary.model";
 
 @Injectable({
   providedIn: "root",
@@ -24,16 +27,18 @@ export class ApiService {
 
   // Pokemon API
   /** 取得寶可夢字典列表 */
-  getPokemonUrlList(limit: number = 10): Observable<PokemonDictionaryEntry> {
-    return this.http.get<PokemonDictionaryEntry>(
+  getPokemonUrlList(
+    limit: number = 10
+  ): Observable<PokemonDictionaryUrlResponse> {
+    return this.http.get<PokemonDictionaryUrlResponse>(
       `${this.pokemonDictionaryList}/?limit=${limit}`
     );
   }
 
   // 取得寶可夢詳細資訊 (species, sprites)
   getPokemonSpeciesAndSprites(
-    pokemonDictionaryResultList: any[]
-  ): Observable<any[]> {
+    pokemonDictionaryResultList: PokemonDictionaryEntry[]
+  ): Observable<PokemonDictionaryEntry[]> {
     const requests = pokemonDictionaryResultList.map((pokemon) =>
       this.http.get<any>(pokemon.url).pipe(
         map((data) => ({
@@ -49,7 +54,9 @@ export class ApiService {
   }
 
   // 取得寶可夢的多語言分類名稱
-  getPokemonGeneraNames(pokemonDictionaryList: any[]): Observable<any[]> {
+  getPokemonNames(
+    pokemonDictionaryList: PokemonDictionaryEntry[]
+  ): Observable<PokemonDictionaryEntry[]> {
     const namesRequests = pokemonDictionaryList.map((pokemon) =>
       this.http.get<any>(pokemon.speciesUrl).pipe(
         map((response) => {
