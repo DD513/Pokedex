@@ -13,4 +13,8 @@ export const API_ROUTES = {
   //   HISTORY: '/api/orders/history'
   // }
   TRAVEL_FOOD: `/OpenData/ODwsv/ODwsvTravelFood.aspx`,
+
+  POKEMON_DICTIONARY: {
+    POKEMON_DICTIONARY_LIST: "/v2/pokemon",
+  },
 };

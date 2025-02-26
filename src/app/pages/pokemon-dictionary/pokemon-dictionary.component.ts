@@ -8,6 +8,7 @@ import { PokemonDictionaryEntry } from "../../core/models/pokemon-dictionary.mod
   styleUrls: ["./pokemon-dictionary.component.css"],
 })
 export class PokemonDictionaryComponent implements OnInit {
+  pokemonDictionaryList: any[] = [];
   pokemonList: PokemonDictionaryEntry[] = [];
   filteredPokemonList: PokemonDictionaryEntry[] = [];
   searchQuery: string = "";
@@ -22,26 +23,49 @@ export class PokemonDictionaryComponent implements OnInit {
   }
 
   loadPokemonData(): void {
-    // 模擬 API 或 JSON 資料
-    this.pokemonList = [
-      {
-        img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-        englishName: "Bulbasaur",
-        chineseName: "妙蛙種子",
-        simplifiedChineseName: "妙蛙种子",
-        koreanName: "이상해씨",
-        japaneseName: "フシギダネ",
-      },
-      {
-        img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-        englishName: "Charmander",
-        chineseName: "小火龍",
-        simplifiedChineseName: "小火龙",
-        koreanName: "파이리",
-        japaneseName: "ヒトカゲ",
-      },
-    ];
-    this.filteredPokemonList = [...this.pokemonList];
+    // 取得寶可夢字典中每隻寶可夢的詳細資訊
+    this.getPokemonDictionaryList();
+  }
+
+  // 取得寶可夢字典中每隻寶可夢的詳細資訊
+  getPokemonDictionaryList(): void {
+    // 🔹 取得寶可夢字典Url清單
+    this.pokemonService
+      .getPokemonDictionaryUrlList()
+      .subscribe((UrlListResponse) => {
+        this.pokemonDictionaryList = UrlListResponse.results;
+        console.log("URL Result:", this.pokemonDictionaryList);
+
+        // 🔹 再次請求每隻寶可夢的詳細資訊 (species & sprites)
+        this.getPokemonSpeciesAndSprites();
+      });
+  }
+
+  // 取得每隻寶可夢的species名稱和sprites
+  getPokemonSpeciesAndSprites(): void {
+    this.pokemonService
+      .getPokemonSpeciesAndSprites(this.pokemonDictionaryList)
+      .subscribe((updatedData) => {
+        this.pokemonDictionaryList = updatedData;
+        console.log(
+          "取得的Species和Sprites的寶可夢資料:",
+          this.pokemonDictionaryList
+        );
+        // 取得寶可夢的多語言分類名稱
+        this.getPokemonGeneraNames();
+      });
+  }
+
+  // 取得每隻寶可夢的多語言分類名稱
+  getPokemonGeneraNames(): void {
+    this.pokemonService
+      .getPokemonGeneraNames(this.pokemonDictionaryList)
+      .subscribe((updatedList) => {
+        this.pokemonDictionaryList = updatedList;
+        console.log("完整的寶可夢資料:", this.pokemonDictionaryList);
+        this.filteredPokemonList = [...this.pokemonDictionaryList];
+        this.cdr.detectChanges(); // 確保 UI 更新
+      });
   }
 
   updateSearchQuery(query: string): void {
@@ -52,14 +76,19 @@ export class PokemonDictionaryComponent implements OnInit {
   updateFilteredPokemonDictionaryList(): void {
     const lowerSearchQuery = this.searchQuery.toLowerCase().trim();
 
-    this.filteredPokemonList = this.pokemonList.filter((pokemon) =>
+    this.filteredPokemonList = this.pokemonDictionaryList.filter((pokemon) =>
       [
-        pokemon.englishName,
-        pokemon.chineseName,
-        pokemon.simplifiedChineseName,
-        pokemon.koreanName,
-        pokemon.japaneseName,
+        pokemon.names.englishName,
+        pokemon.names.chineseName,
+        pokemon.names.simplifiedChineseName,
+        pokemon.names.koreanName,
+        pokemon.names.japaneseName,
       ].some((value) => value.toLowerCase().includes(lowerSearchQuery))
+    );
+    console.log(
+      "Filtered Pokemon List:",
+      this.filteredPokemonList,
+      this.searchQuery
     );
 
     this.cdr.detectChanges();

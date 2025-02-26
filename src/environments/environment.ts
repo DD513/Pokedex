@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   travelFoodUrl: "https://data.moa.gov.tw/Service",
+  pokemon: "https://pokeapi.co/api",
 };
 
 /*

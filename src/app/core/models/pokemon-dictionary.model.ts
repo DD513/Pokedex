@@ -1,8 +1,13 @@
+export interface PokemonDictionaryUrlResponse {
+  results: { name: string; url: string }[];
+}
+
 export interface PokemonDictionaryEntry {
-  img: string;
-  englishName: string;
-  chineseName: string;
-  simplifiedChineseName: string;
-  koreanName: string;
-  japaneseName: string;
+  results?: { name: string; url: string };
+  img?: string;
+  englishName?: string;
+  chineseName?: string;
+  simplifiedChineseName?: string;
+  koreanName?: string;
+  japaneseName?: string;
 }

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Pokemon } from "../models/pokemon.model";
 import { POKEMON_DATA } from "../data/pokemon.data";
+import { ApiService } from "./api.service";
 import {
   PokemonType,
   PokemonTypeColors,
@@ -15,7 +16,7 @@ export class PokemonService {
   private favoritePokemonCodes: Set<string> = new Set();
   private favoritesSubject = new BehaviorSubject<Set<string>>(new Set()); // 讓 PokedexComponent 可以訂閱收藏變化
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     this.loadFavorites();
   }
 
@@ -107,9 +108,28 @@ export class PokemonService {
 
   // 寶可夢類型顏色對應
   getTypeColor(type: string): string {
-    // 🔹 轉換 `string` → `PokemonType`
+    // 轉換 `string` → `PokemonType`
     const pokemonType = Object.values(PokemonType).find((t) => t === type);
 
     return pokemonType ? PokemonTypeColors[pokemonType] : "#FFCB05";
+  }
+
+  // 取得寶可夢字典的URL列表
+  getPokemonDictionaryUrlList(limit: number = 10): Observable<any> {
+    return this.apiService.getPokemonUrlList(limit);
+  }
+
+  // 取得寶可夢物種和圖片
+  getPokemonSpeciesAndSprites(
+    pokemonDictionaryResultList: any[]
+  ): Observable<any[]> {
+    return this.apiService.getPokemonSpeciesAndSprites(
+      pokemonDictionaryResultList
+    );
+  }
+
+  // 取得寶可夢的多語言分類名稱
+  getPokemonGeneraNames(pokemonDictionaryList: any[]): Observable<any[]> {
+    return this.apiService.getPokemonGeneraNames(pokemonDictionaryList);
   }
 }

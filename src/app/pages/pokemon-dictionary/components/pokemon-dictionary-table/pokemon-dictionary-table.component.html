@@ -14,18 +14,20 @@
       <tr *ngFor="let pokemon of pokemonList">
         <td>
           <img
-            [src]="pokemon.img"
+            [src]="pokemon.imageUrl"
             [alt]="pokemon.englishName"
             class="pokemon-img"
           />
         </td>
-        <td class="english-name">{{ pokemon.englishName }}</td>
-        <td class="chinese-name">{{ pokemon.chineseName }}</td>
-        <td class="simplified-chinese-name">
-          {{ pokemon.simplifiedChineseName }}
+        <td class="english-name">{{ pokemon.names.englishName || "顆顆" }}</td>
+        <td class="chinese-name">
+          {{ pokemon.names.traditionalChineseName || "顆顆" }}
         </td>
-        <td class="korean-name">{{ pokemon.koreanName }}</td>
-        <td class="japanese-name">{{ pokemon.japaneseName }}</td>
+        <td class="simplified-chinese-name">
+          {{ pokemon.names.simplifiedChineseName || "顆顆" }}
+        </td>
+        <td class="korean-name">{{ pokemon.names.koreanName || "" }}</td>
+        <td class="japanese-name">{{ pokemon.names.japaneseName || "" }}</td>
       </tr>
     </tbody>
   </table>

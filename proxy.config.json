@@ -4,5 +4,11 @@
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug"
+    },
+    "api": {
+      "target": "https://pokeapi.co/",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
     }
   }
