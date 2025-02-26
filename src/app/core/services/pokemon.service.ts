@@ -1,4 +1,7 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable, forkJoin } from "rxjs";
+import { map, switchMap } from "rxjs/operators";
+
 import { Pokemon } from "../models/pokemon.model";
 import {
   PokemonDictionaryEntry,
@@ -10,7 +13,6 @@ import {
   PokemonType,
   PokemonTypeColors,
 } from "../constants/enums/pokemon-type.enum";
-import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -118,26 +120,97 @@ export class PokemonService {
     return pokemonType ? PokemonTypeColors[pokemonType] : "#FFCB05";
   }
 
-  // 取得寶可夢字典的URL列表
-  getPokemonDictionaryUrlList(
+  // Pokemon Dictionary
+  // 取得完整的寶可夢字典（包含名稱、圖片、多語言分類）
+  // 這邊選擇SwitchMap，因為這些 API 有依賴關係，完成後才能進行下一個，而不是同時進行。mergeMap適用於同時進行的請求，concatMap適用於順序進行的請求。
+  getFullPokemonDictionary(
     limit: number = 10
-  ): Observable<PokemonDictionaryUrlResponse> {
-    return this.apiService.getPokemonUrlList(limit);
+  ): Observable<PokemonDictionaryEntry[]> {
+    return this.getPokemonDictionaryUrlList(limit).pipe(
+      switchMap(
+        (urlListResponse) => this.getPokemonSpeciesAndSprites(urlListResponse) // 取得物種資訊和圖片
+      ),
+      switchMap(
+        (speciesAndSpritesList) => this.getPokemonNames(speciesAndSpritesList) // 取得多語言分類名稱
+      )
+    );
   }
 
-  // 取得寶可夢物種和圖片
-  getPokemonSpeciesAndSprites(
-    pokemonDictionaryResultList: PokemonDictionaryEntry[]
+  // 取得寶可夢字典的URL列表
+  private getPokemonDictionaryUrlList(
+    limit: number = 10
   ): Observable<PokemonDictionaryEntry[]> {
-    return this.apiService.getPokemonSpeciesAndSprites(
-      pokemonDictionaryResultList
+    return this.apiService.getPokemonUrlList(limit).pipe(
+      map((response: PokemonDictionaryUrlResponse) =>
+        response.results.map((pokemon) => ({
+          pokemonName: pokemon.name,
+          url: pokemon.url,
+          speciesName: "",
+          speciesUrl: "",
+          imageUrl: "",
+          names: {
+            englishName: "",
+            japaneseName: "",
+            koreanName: "",
+            traditionalChineseName: "",
+            simplifiedChineseName: "",
+          },
+        }))
+      )
+    );
+  }
+
+  // 取得寶可夢物種和圖片(species, sprites)
+  private getPokemonSpeciesAndSprites(
+    pokemonList: PokemonDictionaryEntry[]
+  ): Observable<PokemonDictionaryEntry[]> {
+    return forkJoin(
+      // forkJoin 同時發送多個請求，等待所有請求完成後再返回。 combineLastest 是持續監聽，會發送最新的值。 zip 是同時進行，當所有 Observable 都有對應數據時才發送，適合一對一數據匹配。
+      pokemonList.map((pokemon) =>
+        this.apiService.getPokemonDetails(pokemon.url).pipe(
+          map((data) => ({
+            ...pokemon,
+            speciesName: data.species.name,
+            speciesUrl: data.species.url,
+            imageUrl: data.sprites.front_default,
+          }))
+        )
+      )
     );
   }
 
   // 取得寶可夢的多語言分類名稱
-  getPokemonNames(
-    pokemonDictionaryList: PokemonDictionaryEntry[]
+  private getPokemonNames(
+    pokemonList: PokemonDictionaryEntry[]
   ): Observable<PokemonDictionaryEntry[]> {
-    return this.apiService.getPokemonNames(pokemonDictionaryList);
+    // console.log("speciesAndSpritesList", pokemonList);
+    return forkJoin(
+      pokemonList.map((pokemon) =>
+        this.apiService.getPokemonSpeciesDetails(pokemon.speciesUrl).pipe(
+          map((response) => ({
+            ...pokemon,
+            names: {
+              englishName: this.extractNames(response.names, "en"),
+              japaneseName: this.extractNames(response.names, "ja"),
+              koreanName: this.extractNames(response.names, "ko"),
+              traditionalChineseName: this.extractNames(
+                response.names,
+                "zh-Hant"
+              ),
+              simplifiedChineseName: this.extractNames(
+                response.names,
+                "zh-Hans"
+              ),
+            },
+          }))
+        )
+      )
+    );
+  }
+
+  // 提取指定語言的分類名稱
+  private extractNames(namesList: any[], languageCode: string): string {
+    const namesObj = namesList.find((g) => g.language.name === languageCode);
+    return namesObj ? namesObj.name : "undefined"; // 若找不到則返回 "undefined"
   }
 }

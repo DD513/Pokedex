@@ -16,10 +16,10 @@ export interface PokemonNameTranslations {
 }
 
 export interface PokemonDictionaryEntry {
-  name?: string;
-  url?: string;
-  speciesName?: string;
-  speciesUrl?: string;
-  imageUrl?: string;
-  names?: PokemonNameTranslations;
+  pokemonName: string;
+  url: string;
+  speciesName: string;
+  speciesUrl: string;
+  imageUrl: string;
+  names: PokemonNameTranslations;
 }
