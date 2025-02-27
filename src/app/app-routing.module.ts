@@ -4,7 +4,7 @@ import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
 
 // 不同的 Layout
 import { PokemonLayoutComponent } from "./components/layout/pokemon-layout/pokemon-layout.component";
-// import { AuthLayoutComponent } from "./components/layout/auth-layout/auth-layout.component";
+import { AuthLayoutComponent } from "./components/layout/auth-layout/auth-layout.component";
 // import { AdminLayoutComponent } from "./components/layout/admin-layout/admin-layout.component";
 
 const routes: Routes = [
@@ -30,14 +30,20 @@ const routes: Routes = [
       { path: "travel-food", component: TravelFoodComponent },
     ],
   },
-  // {
-  //   path: "auth",
-  //   component: AuthLayoutComponent,
-  //   children: [
-  //     { path: "login", loadChildren: "./pages/auth/login.module#LoginModule" },
-  //     { path: "register", loadChildren: "./pages/auth/register.module#RegisterModule" },
-  //   ],
-  // },
+  {
+    path: "auth",
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: "login",
+        loadChildren: "./pages/auth/login/login.module#LoginModule",
+      },
+      // {
+      //   path: "register",
+      //   loadChildren: "./pages/auth/register.module#RegisterModule",
+      // },
+    ],
+  },
   // {
   //   path: "admin",
   //   component: AdminLayoutComponent,

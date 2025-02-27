@@ -7,7 +7,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
 import { PokemonLayoutModule } from "./components/layout/pokemon-layout/pokemon-layout.module";
+import { AuthLayoutModule } from "./components/layout/auth-layout/auth-layout.module";
 import { TravelFoodCardComponent } from "./pages/travel-food/components/travel-food-card/travel-food-card.component";
+import { LoginComponent } from "./pages/auth/login/login.component";
 
 @NgModule({
   declarations: [AppComponent, TravelFoodComponent, TravelFoodCardComponent],
@@ -19,6 +21,7 @@ import { TravelFoodCardComponent } from "./pages/travel-food/components/travel-f
 
     // Shared Layout Module
     PokemonLayoutModule,
+    AuthLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

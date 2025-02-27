@@ -12,6 +12,9 @@ export const IMAGE_PATHS = {
   HOME_LOGIN_ICON: "assets/images/login.png",
   HOME_LOGOUT_ICON: "assets/images/logout.png",
 
+  // Auth
+  LOGIN_PIKACHU_LOGO: "assets/images/login-pikachu.png",
+
   // User
   USER_PETER: `assets/images/User/Peter.png`,
   USER_JOHN_DOE: `assets/images/User/John Doe.png`,
