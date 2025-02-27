@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
+import { AuthGuard } from "./core/guards/auth.guard";
 
 // 不同的 Layout
 import { PokemonLayoutComponent } from "./components/layout/pokemon-layout/pokemon-layout.component";
@@ -21,6 +22,7 @@ const routes: Routes = [
         path: "pokelottery",
         loadChildren:
           "./pages/pokelottery/pokelottery.module#PokelotteryModule",
+        canActivate: [AuthGuard],
       },
       {
         path: "pokemon-dictionary",

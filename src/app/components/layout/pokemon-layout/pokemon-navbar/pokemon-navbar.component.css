@@ -84,6 +84,7 @@ nav ul li:hover .menu-icon {
 .profile-avatar {
   width: 36px;
   height: 36px;
+  padding: 4px;
   border-radius: 50%;
   border: 2px solid #ffcb05;
 }
@@ -137,6 +138,7 @@ nav ul li:hover .menu-icon {
 .dropdown-profile-avatar {
   width: 60px;
   height: 60px;
+  /* padding: 4px; */
   border-radius: 50%;
   border: 2px solid #ffcb05;
 }

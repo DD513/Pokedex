@@ -21,7 +21,7 @@
 
   <div *ngIf="isDropdownOpen" class="dropdown-menu">
     <ul>
-      <li *ngIf="!isLoggedIn" class="dropdown-profile">
+      <li *ngIf="isLoggedIn" class="dropdown-profile">
         <img
           [src]="userAvatar"
           alt="User Avatar"
@@ -33,15 +33,9 @@
         </div>
       </li>
 
-      <hr *ngIf="!isLoggedIn" class="dropdown-divider" />
+      <hr *ngIf="isLoggedIn" class="dropdown-divider" />
 
-      <!-- <li *ngIf="isLoggedIn" (click)="login()">
-        <a routerLink="/" routerLinkActive="active">
-          <img [src]="loginIcon" alt="Login Logo" class="menu-icon" />
-          登入
-        </a>
-      </li> -->
-      <li *ngIf="isLoggedIn" (click)="login()">
+      <li *ngIf="!isLoggedIn" (click)="login()">
         <img [src]="loginIcon" alt="Login Logo" class="menu-icon" />
         登入
       </li>
@@ -63,9 +57,9 @@
         寶可夢字典
       </li>
 
-      <hr *ngIf="!isLoggedIn" class="dropdown-divider" />
+      <hr *ngIf="isLoggedIn" class="dropdown-divider" />
 
-      <li *ngIf="!isLoggedIn" (click)="logout()">
+      <li *ngIf="isLoggedIn" (click)="logout()">
         <img [src]="logoutIcon" alt="Logout Logo" class="menu-icon" />
         登出
       </li>

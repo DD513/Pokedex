@@ -1,6 +1,8 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { IMAGE_PATHS } from "../../../../core/constants/image-paths";
 import { Router } from "@angular/router";
+import { AuthService } from "../../../../core/services/auth.service";
+import { User } from "../../../../core/models/user.model";
 
 @Component({
   selector: "app-pokemon-navbar",
@@ -9,10 +11,11 @@ import { Router } from "@angular/router";
 })
 export class PokemonNavbarComponent implements OnInit {
   isDropdownOpen = false;
-  isLoggedIn = false; // 假設登入狀態，未來可以用 AuthService 來處理
-  userAvatar = IMAGE_PATHS.USER_PETER;
-  userName = "Peter";
-  userEmail = "peter@example.com";
+  isLoggedIn = false;
+
+  userAvatar: string = "";
+  userName: string = "";
+  userEmail: string = "";
 
   // 🔹 圖片路徑
   homePageLogo = IMAGE_PATHS.HOME_PAGE_LOGO;
@@ -23,9 +26,24 @@ export class PokemonNavbarComponent implements OnInit {
   loginIcon = IMAGE_PATHS.HOME_LOGIN_ICON;
   logoutIcon = IMAGE_PATHS.HOME_LOGOUT_ICON;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.getCurrentUser$().subscribe((user) => {
+      if (user) {
+        console.log(user, "12312312");
+        this.isLoggedIn = true;
+        this.userAvatar = user.image;
+        this.userName = user.name;
+        this.userEmail = user.email;
+      } else {
+        this.isLoggedIn = false;
+        this.userAvatar = "../../../assets/images/User/default-user.png";
+        this.userName = "Guest";
+        this.userEmail = "";
+      }
+    });
+  }
 
   toggleDropdown(): void {
     event.stopPropagation();
@@ -34,16 +52,17 @@ export class PokemonNavbarComponent implements OnInit {
 
   navigateTo(path: string): void {
     this.router.navigate([path]);
-    this.isDropdownOpen = false; // 關閉選單
+    this.isDropdownOpen = false;
   }
 
   login(): void {
-    // 這裡放登入邏輯
+    this.router.navigate(["/auth/login"]);
     console.log("登入功能開發中...");
   }
 
   logout(): void {
-    this.isLoggedIn = false;
+    this.authService.logout();
+    this.isDropdownOpen = false;
     console.log("登出成功");
   }
 

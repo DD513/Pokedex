@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { AuthService } from "../../../../core/services/auth.service";
 
 @Component({
   selector: "app-login-form",
@@ -11,17 +12,17 @@ export class LoginFormComponent implements OnInit {
   password: string = "";
   errorMessage: string = "";
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
   ngOnInit() {}
 
   onSubmitForm(event: Event) {
     event.preventDefault();
 
-    if (this.email === "peter@example.com" && this.password === "password") {
-      console.log("登入成功");
+    const isLoginSuccess = this.authService.login(this.email, this.password);
+    if (isLoginSuccess) {
       this.router.navigate(["/pokedex"]);
     } else {
-      this.errorMessage = "帳號或密碼錯誤，請重試";
+      this.errorMessage = "無法展開冒險，請重試！";
     }
   }
 }
