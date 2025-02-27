@@ -8,6 +8,14 @@ export const IMAGE_PATHS = {
   HOME_POKEDEX_LOGO: "assets/images/pokedex-nav-logo.png",
   HOME_POKELOTTERY_LOGO: "assets/images/pokelottery-nav-logo.png",
   HOME_POKEMON_DICTIONARY_LOGO: "assets/images/pokemon-dictionary-nav-logo.png",
+  MENU_DROPDOWN_ICON: "assets/images/menu-dropdown-Icon.png",
+  HOME_LOGIN_ICON: "assets/images/login.png",
+  HOME_LOGOUT_ICON: "assets/images/logout.png",
+
+  // User
+  USER_PETER: `assets/images/User/Peter.png`,
+  USER_JOHN_DOE: `assets/images/User/John Doe.png`,
+  USER_HAEWON: `assets/images/User/Haewon.png`,
 
   // Pokedex
   FAVORITE_FILLED: "assets/images/favorite-filled.png",

@@ -6,28 +6,76 @@
     </a>
   </div>
 
-  <ul>
-    <li>
-      <a routerLink="/pokedex" routerLinkActive="active">
-        <img [src]="pokedexLogo" alt="Pokedex Logo" class="menu-icon" />
-        寶可夢圖鑑
-      </a>
-    </li>
-    <li>
-      <a routerLink="/pokelottery" routerLinkActive="active">
-        <img [src]="pokeLotteryLogo" alt="Pokelottery Logo" class="menu-icon" />
-        寶可夢抽抽樂
-      </a>
-    </li>
-    <li>
-      <a routerLink="/pokemon-dictionary" routerLinkActive="active">
+  <div class="profile-container" (click)="toggleDropdown()">
+    <div class="profile-info">
+      <img [src]="userAvatar" alt="User Avatar" class="profile-avatar" />
+      <span class="profile-name">{{ userName }}</span>
+    </div>
+
+    <img
+      [src]="dropdownMenuIcon"
+      alt="Dropdown Menu"
+      class="dropdown-menu-icon"
+    />
+  </div>
+
+  <div *ngIf="isDropdownOpen" class="dropdown-menu">
+    <ul>
+      <li *ngIf="!isLoggedIn" class="dropdown-profile">
         <img
-          [src]="pokemonDictionaryLogo"
-          alt="Dictionary Icon"
-          class="menu-icon"
+          [src]="userAvatar"
+          alt="User Avatar"
+          class="dropdown-profile-avatar"
         />
-        寶可夢字典
-      </a>
-    </li>
-  </ul>
+        <div class="dropdown-profile-details">
+          <span class="dropdown-profile-name">{{ userName }}</span>
+          <span class="dropdown-profile-email">{{ userEmail }}</span>
+        </div>
+      </li>
+
+      <hr *ngIf="!isLoggedIn" class="dropdown-divider" />
+
+      <li *ngIf="isLoggedIn" (click)="login()">
+        <a routerLink="/" routerLinkActive="active">
+          <img [src]="loginIcon" alt="Login Logo" class="menu-icon" />
+          登入
+        </a>
+      </li>
+      <li>
+        <a routerLink="/pokedex" routerLinkActive="active">
+          <img [src]="pokedexLogo" alt="Pokedex Logo" class="menu-icon" />
+          寶可夢圖鑑
+        </a>
+      </li>
+      <li>
+        <a routerLink="/pokelottery" routerLinkActive="active">
+          <img
+            [src]="pokeLotteryLogo"
+            alt="Pokelottery Logo"
+            class="menu-icon"
+          />
+          寶可夢抽抽樂
+        </a>
+      </li>
+      <li>
+        <a routerLink="/pokemon-dictionary" routerLinkActive="active">
+          <img
+            [src]="pokemonDictionaryLogo"
+            alt="Dictionary Icon"
+            class="menu-icon"
+          />
+          寶可夢字典
+        </a>
+      </li>
+
+      <hr *ngIf="!isLoggedIn" class="dropdown-divider" />
+
+      <li *ngIf="!isLoggedIn" (click)="logout()">
+        <a routerLink="/" routerLinkActive="active">
+          <img [src]="logoutIcon" alt="Logout Logo" class="menu-icon" />
+          登出
+        </a>
+      </li>
+    </ul>
+  </div>
 </nav>
