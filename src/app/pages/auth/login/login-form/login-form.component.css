@@ -1,0 +1,81 @@
+.right-col {
+  flex: 1;
+}
+
+.pokedex-login-container {
+  background: #2b2b2b;
+  border-radius: 15px;
+  border: 2px solid #444;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  text-align: center;
+}
+
+.pokedex-login-container h2 {
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+  color: #ffcb05;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.form-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #fff;
+  background: #3a3a3a;
+  outline: none;
+}
+
+.form-group input:focus {
+  box-shadow: 0 0 5px #ffcb05, 0 0 10px #ffcb05;
+}
+
+.error-message {
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: #ff9999;
+  text-align: left;
+}
+
+.pokedex-login-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #ffcb05;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  text-shadow: none;
+  box-shadow: 0 0 4px rgba(255, 203, 5, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pokedex-login-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 8px rgba(255, 203, 5, 0.6), 0 0 16px rgba(59, 76, 202, 0.4);
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 0.85rem;
+}
+.register-link a {
+  color: #ffcb05;
+  text-decoration: none;
+}
+.register-link a:hover {
+  text-decoration: underline;
+}

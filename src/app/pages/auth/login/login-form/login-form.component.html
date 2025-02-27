@@ -1,0 +1,33 @@
+<div class="pokedex-login-container">
+  <h2>訓練家登入</h2>
+
+  <form (submit)="onSubmitForm($event)">
+    <div class="form-group">
+      <input
+        type="email"
+        placeholder="Email"
+        [(ngModel)]="email"
+        name="email"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        type="password"
+        placeholder="密碼"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+    </div>
+
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button type="submit" class="pokedex-login-button">進入冒險</button>
+
+    <p class="register-link">
+      不是訓練家？ <a routerLink="/auth/register">加入訓練家協會</a>
+    </p>
+  </form>
+</div>
