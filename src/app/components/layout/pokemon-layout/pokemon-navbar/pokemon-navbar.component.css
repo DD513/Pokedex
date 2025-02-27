@@ -56,7 +56,7 @@ nav {
   transition: transform 0.2s ease-in-out;
 }
 
-nav ul li a:hover .menu-icon {
+nav ul li:hover .menu-icon {
   transform: scale(1.2);
 }
 
@@ -159,14 +159,18 @@ nav ul li a:hover .menu-icon {
 }
 
 .dropdown-menu li {
-  padding: 12px 20px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: background 0.2s ease;
-  border-radius: 10px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: start;
+  padding: 16px 20px;
+  min-width: 180px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: background 0.2s ease;
+  border-radius: 10px;
+  color: #333333;
+  gap: 12px;
 }
 
 .dropdown-menu li:hover {
@@ -174,26 +178,9 @@ nav ul li a:hover .menu-icon {
   color: #333;
 }
 
-.dropdown-menu ul li a {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  gap: 12px;
-  color: #333333;
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: bold;
-  padding: 8px 0px;
-  white-space: nowrap;
-  transition: background 0.3s ease, color 0.3s ease;
-  border-radius: 5px;
-  min-width: 160px;
-  text-align: center;
-}
-
 @media (max-width: 768px) {
   .dropdown-menu {
-    right: 10px;
+    right: 12px;
     min-width: 160px;
   }
 }
