@@ -13,12 +13,13 @@ export const IMAGE_PATHS = {
   HOME_LOGOUT_ICON: "assets/images/logout.png",
 
   // Auth
-  LOGIN_PIKACHU_LOGO: "assets/images/login-pikachu.png",
+  LOGIN_PIKACHU_LOGO: "assets/images/auth-login-pikachu.png",
 
   // User
   USER_PETER: `assets/images/User/Peter.png`,
   USER_JOHN_DOE: `assets/images/User/John Doe.png`,
   USER_HAEWON: `assets/images/User/Haewon.png`,
+  USER_POKEMON_TRAINER: `assets/images/User/pokemon-trainer.png`,
 
   // Pokedex
   FAVORITE_FILLED: "assets/images/favorite-filled.png",

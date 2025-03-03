@@ -25,21 +25,21 @@ export class PokemonNavbarComponent implements OnInit {
   dropdownMenuIcon = IMAGE_PATHS.MENU_DROPDOWN_ICON;
   loginIcon = IMAGE_PATHS.HOME_LOGIN_ICON;
   logoutIcon = IMAGE_PATHS.HOME_LOGOUT_ICON;
+  defaultAvatar = IMAGE_PATHS.USER_POKEMON_TRAINER;
 
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.authService.getCurrentUser$().subscribe((user) => {
       if (user) {
-        console.log(user, "12312312");
         this.isLoggedIn = true;
         this.userAvatar = user.image;
         this.userName = user.name;
         this.userEmail = user.email;
       } else {
         this.isLoggedIn = false;
-        this.userAvatar = "../../../assets/images/User/default-user.png";
-        this.userName = "Guest";
+        this.userAvatar = "../../../assets/images/User/pokemon-trainer.png";
+        this.userName = "未知的冒險者";
         this.userEmail = "";
       }
     });
@@ -57,13 +57,14 @@ export class PokemonNavbarComponent implements OnInit {
 
   login(): void {
     this.router.navigate(["/auth/login"]);
-    console.log("登入功能開發中...");
+    // console.log("登入功能開發中...");
   }
 
   logout(): void {
     this.authService.logout();
     this.isDropdownOpen = false;
-    console.log("登出成功");
+    this.isLoggedIn = false;
+    // console.log("登出成功");
   }
 
   @HostListener("document:click", ["$event"])

@@ -39,6 +39,7 @@
         <img [src]="loginIcon" alt="Login Logo" class="menu-icon" />
         登入
       </li>
+      <hr *ngIf="!isLoggedIn" class="dropdown-divider" />
 
       <li (click)="navigateTo('/pokedex')">
         <img [src]="pokedexLogo" alt="Pokedex Logo" class="menu-icon" />

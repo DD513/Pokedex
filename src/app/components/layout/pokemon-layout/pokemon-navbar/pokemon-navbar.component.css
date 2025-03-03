@@ -6,7 +6,8 @@ nav {
       transparent 1px
     ),
     radial-gradient(circle, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
-  background-size: 40px 40px, 80px 80px;
+  background-size: 50px 50px, 100px 100px;
+  background-position: 0 0, 25px 25px;
   padding: 15px 20px;
   border-bottom: 5px solid #ffcb05;
   display: flex;
@@ -64,7 +65,7 @@ nav ul li:hover .menu-icon {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 160px;
+  width: 200px;
   cursor: pointer;
   padding: 8px 16px;
   border-radius: 8px;
@@ -75,6 +76,7 @@ nav ul li:hover .menu-icon {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-right: 8px;
 }
 
 .profile-container:hover {

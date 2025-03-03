@@ -18,7 +18,7 @@
 }
 
 .pikachu-img {
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
   transition: transform 0.4s ease, filter 0.4s ease;
   filter: drop-shadow(0 0 5px #ffcb05);
@@ -55,5 +55,6 @@
   }
   .pikachu-img {
     max-width: 280px;
+    margin-top: 320px;
   }
 }
