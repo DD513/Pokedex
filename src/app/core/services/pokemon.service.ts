@@ -210,7 +210,7 @@ export class PokemonService {
 
   // 提取指定語言的分類名稱
   private extractNames(namesList: any[], languageCode: string): string {
-    const namesObj = namesList.find((g) => g.language.name === languageCode);
+    const namesObj = namesList.find((n) => n.language.name === languageCode);
     return namesObj ? namesObj.name : "undefined"; // 若找不到則返回 "undefined"
   }
 }

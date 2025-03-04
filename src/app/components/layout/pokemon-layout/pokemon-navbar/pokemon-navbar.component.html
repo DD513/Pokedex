@@ -58,6 +58,17 @@
         寶可夢字典
       </li>
 
+      <hr class="dropdown-divider" />
+
+      <li (click)="navigateTo('/pokedex')">
+        <img [src]="pokedexLogo" alt="Pokemon News" class="menu-icon" />
+        最新消息
+      </li>
+      <li (click)="navigateTo('/pokedex')">
+        <img [src]="pokedexLogo" alt="About As" class="menu-icon" />
+        取得Pokemon應用程式
+      </li>
+
       <hr *ngIf="isLoggedIn" class="dropdown-divider" />
 
       <li *ngIf="isLoggedIn" (click)="logout()">
