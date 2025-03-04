@@ -11,6 +11,8 @@ export const IMAGE_PATHS = {
   MENU_DROPDOWN_ICON: "assets/images/menu-dropdown-Icon.png",
   HOME_LOGIN_ICON: "assets/images/login.png",
   HOME_LOGOUT_ICON: "assets/images/logout.png",
+  HOME_POKEMON_NEWS: "assets/images/news-icon.png",
+  HOME_POKEMON_APP_ICON: "assets/images/pokemon-go-APP-icon.png",
 
   // Auth
   LOGIN_PIKACHU_LOGO: "assets/images/auth-login-pikachu.png",

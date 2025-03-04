@@ -26,6 +26,8 @@ export class PokemonNavbarComponent implements OnInit {
   loginIcon = IMAGE_PATHS.HOME_LOGIN_ICON;
   logoutIcon = IMAGE_PATHS.HOME_LOGOUT_ICON;
   defaultAvatar = IMAGE_PATHS.USER_POKEMON_TRAINER;
+  pokemonGoAppIcon = IMAGE_PATHS.HOME_POKEMON_APP_ICON;
+  pokemonNewsIcon = IMAGE_PATHS.HOME_POKEMON_NEWS;
 
   constructor(private router: Router, private authService: AuthService) {}
 
