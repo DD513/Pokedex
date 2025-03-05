@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../../../../core/services/auth.service";
 
@@ -13,13 +13,17 @@ export class LoginFormComponent implements OnInit {
   errorMessage: string = "";
 
   constructor(private router: Router, private authService: AuthService) {}
+  @Output() loginSuccess = new EventEmitter<void>(); // 🔹 登入成功事件
+
   ngOnInit() {}
 
   onSubmitForm(event: Event) {
     event.preventDefault();
 
     const isLoginSuccess = this.authService.login(this.email, this.password);
+
     if (isLoginSuccess) {
+      this.loginSuccess.emit();
       this.router.navigate(["/pokedex"]);
     } else {
       this.errorMessage = "無法展開冒險，請重試！";

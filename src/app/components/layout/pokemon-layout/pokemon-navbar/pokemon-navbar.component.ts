@@ -12,6 +12,7 @@ import { User } from "../../../../core/models/user.model";
 export class PokemonNavbarComponent implements OnInit {
   isDropdownOpen = false;
   isLoggedIn = false;
+  isLoginModalOpen = false;
 
   userAvatar: string = "";
   userName: string = "";
@@ -47,6 +48,18 @@ export class PokemonNavbarComponent implements OnInit {
     });
   }
 
+  openLoginModal() {
+    this.isLoginModalOpen = true;
+  }
+
+  handlePokelotteryClick() {
+    if (this.isLoggedIn) {
+      this.router.navigate(["/pokelottery"]);
+    } else {
+      this.openLoginModal();
+    }
+  }
+
   toggleDropdown(): void {
     event.stopPropagation();
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -57,10 +70,10 @@ export class PokemonNavbarComponent implements OnInit {
     this.isDropdownOpen = false;
   }
 
-  login(): void {
-    this.router.navigate(["/auth/login"]);
-    // console.log("登入功能開發中...");
-  }
+  // login(): void {
+  //   this.router.navigate(["/auth/login"]);
+  //   // console.log("登入功能開發中...");
+  // }
 
   logout(): void {
     this.authService.logout();

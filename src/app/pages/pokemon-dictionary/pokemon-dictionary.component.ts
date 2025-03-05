@@ -27,7 +27,7 @@ export class PokemonDictionaryComponent implements OnInit {
       this.pokemonDictionaryList = fullData;
       this.filteredPokemonList = [...fullData];
       // console.log("完整的寶可夢資料:", this.pokemonDictionaryList);
-      this.cdr.detectChanges();
+      // this.cdr.detectChanges();
     });
   }
 
@@ -44,6 +44,6 @@ export class PokemonDictionaryComponent implements OnInit {
         value.toLowerCase().includes(lowerSearchQuery)
       )
     );
-    this.cdr.detectChanges();
+    // this.cdr.detectChanges();
   }
 }

@@ -35,7 +35,7 @@
 
       <hr *ngIf="isLoggedIn" class="dropdown-divider" />
 
-      <li *ngIf="!isLoggedIn" (click)="login()">
+      <li *ngIf="!isLoggedIn" (click)="openLoginModal()">
         <img [src]="loginIcon" alt="Login Logo" class="menu-icon" />
         登入
       </li>
@@ -45,7 +45,7 @@
         <img [src]="pokedexLogo" alt="Pokedex Logo" class="menu-icon" />
         寶可夢圖鑑
       </li>
-      <li (click)="navigateTo('/pokelottery')">
+      <li (click)="handlePokelotteryClick()">
         <img [src]="pokeLotteryLogo" alt="Pokelottery Logo" class="menu-icon" />
         寶可夢抽抽樂
       </li>
@@ -78,3 +78,8 @@
     </ul>
   </div>
 </nav>
+
+<app-login-modal
+  *ngIf="isLoginModalOpen"
+  (close)="isLoginModalOpen = false"
+></app-login-modal>
