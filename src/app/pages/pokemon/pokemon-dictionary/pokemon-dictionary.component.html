@@ -5,7 +5,22 @@
     (queryChange)="updateSearchQuery($event)"
   ></pokemon-dictionary-search-bar>
 
-  <pokemon-dictionary-table
-    [pokemonList]="filteredPokemonList"
-  ></pokemon-dictionary-table>
+  <div class="pokemon-table-container">
+    <div *ngIf="isLoading" class="loading-dots">
+      <span></span><span></span><span></span>
+    </div>
+
+    <pokemon-dictionary-table
+      *ngIf="!isLoading"
+      [pokemonList]="filteredPokemonList"
+    ></pokemon-dictionary-table>
+  </div>
+
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="offset === 0 || isLoading">
+      上一頁
+    </button>
+    <span>第 {{ currentPage }} 頁</span>
+    <button (click)="nextPage()" [disabled]="isLoading">下一頁</button>
+  </div>
 </div>

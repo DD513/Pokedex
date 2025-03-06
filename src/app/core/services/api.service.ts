@@ -29,9 +29,12 @@ export class ApiService extends BaseApiService {
 
   // Pokemon Dictionary API
   // 取得寶可夢 URL 列表
-  getPokemonUrlList(limit: number): Observable<PokemonDictionaryUrlResponse> {
+  getPokemonUrlList(
+    offset: number,
+    limit: number
+  ): Observable<PokemonDictionaryUrlResponse> {
     return this.get<PokemonDictionaryUrlResponse>(
-      `${this.pokemonDictionary}/?limit=${limit}`
+      `${this.pokemonDictionary}/?offset=${offset}&limit=${limit}`
     );
   }
 

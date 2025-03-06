@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { PokemonService } from "../../../core/services/pokemon.service";
 import { PokemonDictionaryEntry } from "../../../core/models/pokemon-dictionary.model";
 
@@ -12,10 +12,12 @@ export class PokemonDictionaryComponent implements OnInit {
   filteredPokemonList: PokemonDictionaryEntry[] = [];
   searchQuery: string = "";
 
-  constructor(
-    private pokemonService: PokemonService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  offset: number = 0;
+  limit: number = 10;
+  currentPage: number = 1;
+  isLoading: boolean = false;
+
+  constructor(private pokemonService: PokemonService) {}
 
   ngOnInit(): void {
     this.loadPokemonData();
@@ -23,11 +25,15 @@ export class PokemonDictionaryComponent implements OnInit {
 
   loadPokemonData(): void {
     // 取得寶可夢字典中每隻寶可夢的詳細資訊
-    this.pokemonService.getFullPokemonDictionary().subscribe((fullData) => {
-      this.pokemonDictionaryList = fullData;
-      this.filteredPokemonList = [...fullData];
-      // console.log("完整的寶可夢資料:", this.pokemonDictionaryList);
-    });
+    this.isLoading = true;
+    this.pokemonService
+      .getFullPokemonDictionary(this.offset, this.limit)
+      .subscribe((fullData) => {
+        this.pokemonDictionaryList = fullData;
+        this.filteredPokemonList = [...fullData];
+        this.isLoading = false;
+        // console.log("完整的寶可夢資料:", this.pokemonDictionaryList);
+      });
   }
 
   updateSearchQuery(query: string): void {
@@ -43,5 +49,19 @@ export class PokemonDictionaryComponent implements OnInit {
         value.toLowerCase().includes(lowerSearchQuery)
       )
     );
+  }
+
+  prevPage(): void {
+    if (this.offset >= this.limit) {
+      this.offset -= this.limit;
+      this.currentPage--;
+      this.loadPokemonData();
+    }
+  }
+
+  nextPage(): void {
+    this.offset += this.limit;
+    this.currentPage++;
+    this.loadPokemonData();
   }
 }

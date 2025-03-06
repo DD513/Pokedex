@@ -7,12 +7,25 @@
 
 .pokemon-table {
   width: 100%;
+  min-height: 440px;
+  max-height: 440px;
   margin: 20px;
   border-collapse: collapse;
   background: #f8f9fa;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.pokemon-table tbody {
+  display: block;
+  max-height: 400px; /* 限制tbody高度 */
+  overflow-y: auto;
+}
+.pokemon-table thead,
+.pokemon-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* 讓欄位等寬 */
 }
 
 .pokemon-table th {
