@@ -22,7 +22,11 @@ export class PokemonService {
   private favoritePokemonCodes: Set<string> = new Set();
   private favoritesSubject = new BehaviorSubject<Set<string>>(new Set()); // 讓 PokedexComponent 可以訂閱收藏變化
 
-  constructor(private apiService: ApiService) {
+  private defaultPokemonLimit = 10;
+
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit() {
     this.loadFavorites();
   }
 
@@ -123,10 +127,8 @@ export class PokemonService {
   // Pokemon Dictionary
   // 取得完整的寶可夢字典（包含名稱、圖片、多語言分類）
   // 這邊選擇SwitchMap，因為這些 API 有依賴關係，完成後才能進行下一個，而不是同時進行。mergeMap適用於同時進行的請求，concatMap適用於順序進行的請求。
-  getFullPokemonDictionary(
-    limit: number = 10
-  ): Observable<PokemonDictionaryEntry[]> {
-    return this.getPokemonDictionaryUrlList(limit).pipe(
+  getFullPokemonDictionary(): Observable<PokemonDictionaryEntry[]> {
+    return this.getPokemonDictionaryUrlList().pipe(
       switchMap(
         (urlListResponse) => this.getPokemonSpeciesAndSprites(urlListResponse) // 取得物種資訊和圖片
       ),
@@ -138,7 +140,7 @@ export class PokemonService {
 
   // 取得寶可夢字典的URL列表
   private getPokemonDictionaryUrlList(
-    limit: number = 10
+    limit: number = this.defaultPokemonLimit
   ): Observable<PokemonDictionaryEntry[]> {
     return this.apiService.getPokemonUrlList(limit).pipe(
       map((response: PokemonDictionaryUrlResponse) =>
