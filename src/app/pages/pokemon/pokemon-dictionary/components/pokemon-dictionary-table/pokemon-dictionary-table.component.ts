@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { PokemonDictionaryEntry } from "../../../../core/models/pokemon-dictionary.model";
+import { PokemonDictionaryEntry } from "../../../../../core/models/pokemon-dictionary.model";
 
 @Component({
   selector: "pokemon-dictionary-table",

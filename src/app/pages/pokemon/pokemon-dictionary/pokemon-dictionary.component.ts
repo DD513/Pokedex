@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
-import { PokemonService } from "../../core/services/pokemon.service";
-import { PokemonDictionaryEntry } from "../../core/models/pokemon-dictionary.model";
+import { PokemonService } from "../../../core/services/pokemon.service";
+import { PokemonDictionaryEntry } from "../../../core/models/pokemon-dictionary.model";
 
 @Component({
   selector: "app-pokemon-dictionary",

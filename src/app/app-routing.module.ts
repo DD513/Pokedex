@@ -16,18 +16,18 @@ const routes: Routes = [
       { path: "", redirectTo: "/pokedex", pathMatch: "full" },
       {
         path: "pokedex",
-        loadChildren: "./pages/pokedex/pokedex.module#PokedexModule",
+        loadChildren: "./pages/pokemon/pokedex/pokedex.module#PokedexModule",
       },
       {
         path: "pokelottery",
         loadChildren:
-          "./pages/pokelottery/pokelottery.module#PokelotteryModule",
+          "./pages/pokemon/pokelottery/pokelottery.module#PokelotteryModule",
         canActivate: [AuthGuard],
       },
       {
         path: "pokemon-dictionary",
         loadChildren:
-          "./pages/pokemon-dictionary/pokemon-dictionary.module#PokemonDictionaryModule",
+          "./pages/pokemon/pokemon-dictionary/pokemon-dictionary.module#PokemonDictionaryModule",
       },
       { path: "travel-food", component: TravelFoodComponent },
     ],
