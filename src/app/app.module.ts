@@ -6,10 +6,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
-import { PokemonLayoutModule } from "./components/layout/pokemon-layout/pokemon-layout.module";
-import { AuthLayoutModule } from "./components/layout/auth-layout/auth-layout.module";
+
 import { TravelFoodCardComponent } from "./pages/travel-food/components/travel-food-card/travel-food-card.component";
 import { SharedModule } from "./shared/shared.module";
+import { CoreModule } from "./core/core.module";
 
 @NgModule({
   declarations: [AppComponent, TravelFoodComponent, TravelFoodCardComponent],
@@ -19,9 +19,7 @@ import { SharedModule } from "./shared/shared.module";
     FormsModule,
     HttpClientModule,
 
-    // Shared Layout Module
-    PokemonLayoutModule,
-    AuthLayoutModule,
+    CoreModule,
     SharedModule,
   ],
   providers: [],

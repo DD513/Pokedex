@@ -4,8 +4,8 @@ import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
 import { AuthGuard } from "./core/guards/auth.guard";
 
 // 不同的 Layout
-import { PokemonLayoutComponent } from "./components/layout/pokemon-layout/pokemon-layout.component";
-import { AuthLayoutComponent } from "./components/layout/auth-layout/auth-layout.component";
+import { PokemonLayoutComponent } from "./core/layout/pokemon-layout/pokemon-layout.component";
+import { AuthLayoutComponent } from "./core/layout/auth-layout/auth-layout.component";
 // import { AdminLayoutComponent } from "./components/layout/admin-layout/admin-layout.component";
 
 const routes: Routes = [
@@ -36,6 +36,7 @@ const routes: Routes = [
     path: "auth",
     component: AuthLayoutComponent,
     children: [
+      { path: "", redirectTo: "/auth/login", pathMatch: "full" },
       {
         path: "login",
         loadChildren: "./pages/auth/login/login.module#LoginModule",

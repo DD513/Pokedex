@@ -4,7 +4,7 @@ import { User } from "../models/user.model";
 import { USER_LIST } from "../data/user.data";
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root", // 使用 root，確保全局單例
 })
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
