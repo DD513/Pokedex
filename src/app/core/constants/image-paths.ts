@@ -23,10 +23,12 @@ export const IMAGE_PATHS = {
   USER_HAEWON: `assets/images/User/Haewon.png`,
   USER_POKEMON_TRAINER: `assets/images/User/pokemon-trainer.png`,
 
-  // Pokedex
+  // Pokemon
   FAVORITE_FILLED: "assets/images/favorite-filled.png",
   FAVORITE_OUTLINE: "assets/images/favorite-outline.png",
   NOT_FOUND: "assets/images/not-found.png",
+  POKEMON_DICTIONARY_NOT_FOUND:
+    "assets/images/pokemon-dictionary-not-found.png",
 
   // loading
   LOADING_EGG: "assets/images/loading-egg.png",

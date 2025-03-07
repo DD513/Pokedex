@@ -33,7 +33,7 @@ export class PokemonNavbarComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.getCurrentUser$().subscribe((user) => {
+    this.authService.getCurrentUser().subscribe((user) => {
       if (user) {
         this.isLoggedIn = true;
         this.userAvatar = user.image;

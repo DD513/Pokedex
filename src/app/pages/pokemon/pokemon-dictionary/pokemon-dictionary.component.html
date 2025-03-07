@@ -6,13 +6,13 @@
   ></pokemon-dictionary-search-bar>
 
   <div class="pokemon-table-container">
-    <div *ngIf="isLoading" class="loading-dots">
+    <!-- <div *ngIf="isLoading" class="loading-dots">
       <span></span><span></span><span></span>
-    </div>
+    </div> -->
 
     <pokemon-dictionary-table
-      *ngIf="!isLoading"
       [pokemonList]="filteredPokemonList"
+      [isLoading]="isLoading"
     ></pokemon-dictionary-table>
   </div>
 

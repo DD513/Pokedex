@@ -30,7 +30,7 @@ export class PokemonDictionaryComponent implements OnInit {
       .getFullPokemonDictionary(this.offset, this.limit)
       .subscribe((fullData) => {
         this.pokemonDictionaryList = fullData;
-        this.filteredPokemonList = [...fullData];
+        this.updateFilteredPokemonDictionaryList();
         this.isLoading = false;
         // console.log("完整的寶可夢資料:", this.pokemonDictionaryList);
       });

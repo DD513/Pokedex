@@ -12,7 +12,8 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit(): void {
-    this.authService.getCurrentUser$().subscribe((user) => {
+    // 這邊因為我要實時監聽使用者是否在登入中，因此保留getCurrentUser()，而不是checkIsLoggedIn()
+    this.authService.getCurrentUser().subscribe((user) => {
       if (!user) {
         // 如果當前頁面是受保護頁面，則強制導向/pokedex頁面
         const protectedRoutes = ["/pokelottery"];

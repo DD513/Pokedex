@@ -10,7 +10,22 @@
         <th>日文</th>
       </tr>
     </thead>
-    <tbody>
+
+    <tbody *ngIf="isLoading">
+      <tr>
+        <td colspan="6">
+          <div class="loading-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="!isLoading && pokemonList.length === 0">
+      <ng-container *ngTemplateOutlet="noResults"></ng-container>
+    </tbody>
+
+    <tbody *ngIf="!isLoading && pokemonList.length > 0">
       <tr *ngFor="let pokemon of pokemonList">
         <td>
           <img
@@ -32,3 +47,11 @@
     </tbody>
   </table>
 </div>
+
+<ng-template #noResults>
+  <div class="no-results">
+    <img [src]="notFound" alt="Pokemon Not Found" class="no-results-img" />
+    沒有尋找到寶可夢。<br />
+    <span>用別的條件重新搜尋吧。</span>
+  </div>
+</ng-template>

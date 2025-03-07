@@ -41,8 +41,7 @@ export class AuthService {
     console.log("已登出");
   }
 
-  // $ 代表這是一個 Observable 物件
-  getCurrentUser$() {
+  getCurrentUser() {
     return this.currentUserSubject.asObservable();
   }
 
