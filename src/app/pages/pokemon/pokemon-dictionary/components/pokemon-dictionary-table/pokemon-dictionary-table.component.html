@@ -29,8 +29,9 @@
       <tr *ngFor="let pokemon of pokemonList">
         <td>
           <img
+            *ngIf="pokemon.imageUrl"
             [src]="pokemon.imageUrl"
-            [alt]="pokemon.englishName"
+            [alt]="pokemon.names?.englishName || 'Pokemon Image'"
             class="pokemon-img"
           />
         </td>

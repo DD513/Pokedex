@@ -6,6 +6,7 @@ import { Pokemon } from "../models/pokemon.model";
 import {
   PokemonDictionaryEntry,
   PokemonDictionaryUrlResponse,
+  PokemonNameTranslations,
 } from "../models/pokemon-dictionary.model";
 import { POKEMON_DATA } from "../data/pokemon.data";
 import { ApiService } from "./api.service";
@@ -13,6 +14,7 @@ import {
   PokemonType,
   PokemonTypeColors,
 } from "../constants/enums/pokemon-type.enum";
+import { PokemonLanguageMapping } from "../constants/enums/pokemon-language-code.enum";
 
 @Injectable({
   providedIn: "root",
@@ -152,13 +154,7 @@ export class PokemonService {
           speciesName: "",
           speciesUrl: "",
           imageUrl: "",
-          names: {
-            englishName: "",
-            japaneseName: "",
-            koreanName: "",
-            traditionalChineseName: "",
-            simplifiedChineseName: "",
-          },
+          names: this.initializePokemonNames(),
         }))
       )
     );
@@ -193,28 +189,67 @@ export class PokemonService {
         this.apiService.getPokemonSpeciesDetails(pokemon.speciesUrl).pipe(
           map((response) => ({
             ...pokemon,
-            names: {
-              englishName: this.extractNames(response.names, "en"),
-              japaneseName: this.extractNames(response.names, "ja"),
-              koreanName: this.extractNames(response.names, "ko"),
-              traditionalChineseName: this.extractNames(
-                response.names,
-                "zh-Hant"
-              ),
-              simplifiedChineseName: this.extractNames(
-                response.names,
-                "zh-Hans"
-              ),
-            },
+            // names: {
+            //   englishName: this.extractNames(response.names, "en"),
+            //   japaneseName: this.extractNames(response.names, "ja"),
+            //   koreanName: this.extractNames(response.names, "ko"),
+            //   traditionalChineseName: this.extractNames(
+            //     response.names,
+            //     "zh-Hant"
+            //   ),
+            //   simplifiedChineseName: this.extractNames(
+            //     response.names,
+            //     "zh-Hans"
+            //   ),
+            // },
+            names: this.extractAllNames(response.names),
           }))
         )
       )
     );
   }
 
-  // 提取指定語言的分類名稱
-  private extractNames(namesList: any[], languageCode: string): string {
-    const namesObj = namesList.find((n) => n.language.name === languageCode);
-    return namesObj ? namesObj.name : "undefined"; // 若找不到則返回 "undefined"
+  // 初始化 `names`，避免 undefined
+  private initializePokemonNames(): PokemonNameTranslations {
+    // reduce 可以用來累積（accumulate）資料，並轉換成一個新的值。 ["en", "englishName"],["ja", "japaneseName"]轉換為englishName: "",japaneseName: "",。
+    return Object.entries(PokemonLanguageMapping).reduce(
+      (pokemonNames, [_, displayName]) => {
+        pokemonNames[displayName] = "";
+        return pokemonNames;
+      },
+      {} as PokemonNameTranslations
+    );
   }
+
+  // this.extractAllNames(response.names) 轉換 en、ja 等語言代碼為 englishName、japaneseName。
+  private extractAllNames(namesList: any[]): PokemonNameTranslations {
+    // Object.entries(PokemonLanguageMapping) 會返回 [key, value]，即：["en", "englishName"],["ja", "japaneseName"],接著用 reduce() 轉換成 englishName: "Ivysaur",japaneseName: "フシギソウ",
+    return Object.entries(PokemonLanguageMapping).reduce(
+      (pokemonNames, [languageCode, displayName]) => {
+        pokemonNames[displayName] = this.extractNameByLanguage(
+          namesList,
+          languageCode
+        );
+        return pokemonNames;
+      },
+      {} as PokemonNameTranslations
+    ); // {} 是初始值，表示建立一個物件
+  }
+
+  // 提取特定語言的名稱
+  private extractNameByLanguage(
+    namesList: any[],
+    languageCode: string
+  ): string {
+    const nameEntry = namesList.find(
+      (entry) => entry.language.name === languageCode
+    );
+    return nameEntry ? nameEntry.name : "";
+  }
+
+  // 提取指定語言的分類名稱
+  // private extractNames(namesList: any[], languageCode: string): string {
+  //   const namesObj = namesList.find((n) => n.language.name === languageCode);
+  //   return namesObj ? namesObj.name : "undefined"; // 若找不到則返回 "undefined"
+  // }
 }
