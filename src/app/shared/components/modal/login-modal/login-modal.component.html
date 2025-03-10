@@ -1,6 +1,6 @@
 <div class="login-modal-overlay" (click)="closeModal()">
   <div class="login-modal" (click)="$event.stopPropagation()">
     <h2>訓練家，準備踏上旅程吧！</h2>
-    <app-login-form (loginSuccess)="onLoginSuccess()"></app-login-form>
+    <app-login-form (loginSuccess)="handleLoginSuccess()"></app-login-form>
   </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { IMAGE_PATHS } from "../../../core/constants/image-paths";
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
   selector: "app-login",
@@ -10,11 +11,15 @@ import { IMAGE_PATHS } from "../../../core/constants/image-paths";
 export class LoginComponent implements OnInit {
   loginPikachuLogo = IMAGE_PATHS.LOGIN_PIKACHU_LOGO;
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
   goHome() {
     this.router.navigateByUrl("/");
+  }
+
+  handleLoginSuccess() {
+    this.router.navigate(["/pokedex"]);
   }
 }

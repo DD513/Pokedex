@@ -13,6 +13,8 @@ export class PokemonNavbarComponent implements OnInit {
   isDropdownOpen = false;
   isLoggedIn = false;
   isLoginModalOpen = false;
+  pendingRedirectAfterLogin = false;
+  pendingRouteAfterLogin: string | null = null; // 記錄受保護頁面路由
 
   userAvatar: string = "";
   userName: string = "";
@@ -52,11 +54,22 @@ export class PokemonNavbarComponent implements OnInit {
     this.isLoginModalOpen = true;
   }
 
-  handlePokelotteryClick() {
+  handleProtectedRouteNavigation(route: string) {
     if (this.isLoggedIn) {
-      this.router.navigate(["/pokelottery"]);
+      this.router.navigate([route]);
     } else {
+      this.pendingRedirectAfterLogin = true;
+      this.pendingRouteAfterLogin = route;
       this.openLoginModal();
+    }
+  }
+
+  handleLoginCompleted() {
+    this.isLoginModalOpen = false;
+    if (this.pendingRedirectAfterLogin && this.pendingRouteAfterLogin) {
+      this.router.navigate([this.pendingRouteAfterLogin]);
+      this.pendingRedirectAfterLogin = false;
+      this.pendingRouteAfterLogin = null;
     }
   }
 

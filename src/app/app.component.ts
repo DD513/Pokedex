@@ -14,13 +14,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // 這邊因為我要實時監聽使用者是否在登入中，因此保留getCurrentUser()，而不是checkIsLoggedIn()
     this.authService.getCurrentUser().subscribe((user) => {
-      if (!user) {
-        // 如果當前頁面是受保護頁面，則強制導向/pokedex頁面
-        const protectedRoutes = ["/pokelottery"];
+      const isLoggedIn = !!user;
+      const protectedRoutes = ["/pokelottery"];
 
-        if (protectedRoutes.includes(this.router.url)) {
-          this.router.navigate(["/pokedex"]);
-        }
+      //  如果未登入，且當前路由是受保護頁面，則導回首頁
+      if (!isLoggedIn && protectedRoutes.includes(this.router.url)) {
+        this.router.navigate(["/pokedex"]);
       }
     });
   }

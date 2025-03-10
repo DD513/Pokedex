@@ -9,6 +9,7 @@ import { AuthService } from "../../../../core/services/auth.service";
 })
 export class LoginModalComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
+  @Output() loginCompleted = new EventEmitter<void>();
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -18,7 +19,8 @@ export class LoginModalComponent implements OnInit {
     this.close.emit();
   }
 
-  onLoginSuccess() {
+  handleLoginSuccess() {
+    this.loginCompleted.emit();
     this.closeModal();
   }
 }

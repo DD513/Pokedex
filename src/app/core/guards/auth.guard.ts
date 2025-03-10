@@ -12,7 +12,7 @@ import { AuthService } from "../services/auth.service";
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
-
+  // AuthGuard 負責攔截未登入的使用者進入受保護頁面，無法及時監聽。
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

@@ -13,8 +13,7 @@ export class LoginFormComponent implements OnInit {
   errorMessage: string = "";
 
   constructor(private router: Router, private authService: AuthService) {}
-  @Output() loginSuccess = new EventEmitter<void>(); // 🔹 登入成功事件
-
+  @Output() loginSuccess = new EventEmitter<void>();
   ngOnInit() {}
 
   onSubmitForm(event: Event) {
@@ -24,7 +23,7 @@ export class LoginFormComponent implements OnInit {
 
     if (isLoginSuccess) {
       this.loginSuccess.emit();
-      this.router.navigate(["/pokedex"]);
+      // this.router.navigate(["/pokedex"]);
     } else {
       this.errorMessage = "無法展開冒險，請重試！";
     }

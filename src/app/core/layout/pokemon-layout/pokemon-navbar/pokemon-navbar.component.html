@@ -45,7 +45,7 @@
         <img [src]="pokedexLogo" alt="Pokedex Logo" class="menu-icon" />
         寶可夢圖鑑
       </li>
-      <li (click)="handlePokelotteryClick()">
+      <li (click)="handleProtectedRouteNavigation('/pokelottery')">
         <img [src]="pokeLotteryLogo" alt="Pokelottery Logo" class="menu-icon" />
         寶可夢抽抽樂
       </li>
@@ -82,4 +82,5 @@
 <app-login-modal
   *ngIf="isLoginModalOpen"
   (close)="isLoginModalOpen = false"
+  (loginCompleted)="handleLoginCompleted()"
 ></app-login-modal>
