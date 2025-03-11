@@ -11,6 +11,8 @@ export class LoginModalComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
   @Output() loginCompleted = new EventEmitter<void>();
 
+  isRegistering = false;
+
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {}
@@ -22,5 +24,17 @@ export class LoginModalComponent implements OnInit {
   handleLoginSuccess() {
     this.loginCompleted.emit();
     this.closeModal();
+  }
+
+  handleRegisterSuccess() {
+    this.isRegistering = false;
+  }
+
+  switchToRegister() {
+    this.isRegistering = true;
+  }
+
+  switchToLogin() {
+    this.isRegistering = false;
   }
 }

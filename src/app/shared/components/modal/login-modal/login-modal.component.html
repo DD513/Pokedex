@@ -1,6 +1,31 @@
 <div class="login-modal-overlay" (click)="closeModal()">
   <div class="login-modal" (click)="$event.stopPropagation()">
-    <h2>訓練家，準備踏上旅程吧！</h2>
-    <app-login-form (loginSuccess)="handleLoginSuccess()"></app-login-form>
+    <h2>
+      {{
+        isRegistering ? "訓練家，來加入冒險吧！" : "訓練家，準備踏上旅程吧！"
+      }}
+    </h2>
+
+    <div class="modal-content">
+      <div class="form-container">
+        <app-login-form
+          [ngClass]="{
+            'hide-form': isRegistering,
+            'show-form': !isRegistering
+          }"
+          (loginSuccess)="handleLoginSuccess()"
+          (switchToRegister)="switchToRegister()"
+        ></app-login-form>
+
+        <app-register-form
+          [ngClass]="{
+            'hide-form': !isRegistering,
+            'show-form': isRegistering
+          }"
+          (registerSuccess)="handleRegisterSuccess()"
+          (switchToLogin)="switchToLogin()"
+        ></app-register-form>
+      </div>
+    </div>
   </div>
 </div>

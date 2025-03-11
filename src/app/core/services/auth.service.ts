@@ -33,6 +33,10 @@ export class AuthService {
     }
   }
 
+  public register(username: string, email: string, password: string) {
+    return true;
+  }
+
   public logout(): void {
     this.currentUserSubject$.next(null);
     localStorage.removeItem("currentUser");

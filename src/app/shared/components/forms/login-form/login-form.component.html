@@ -27,7 +27,7 @@
     <button type="submit" class="pokedex-login-button">進入冒險</button>
 
     <p class="register-link">
-      不是訓練家？ <a routerLink="/auth/register">加入訓練家協會</a>
+      不是訓練家？ <a (click)="switchToRegister.emit()">加入訓練家協會</a>
     </p>
   </form>
 </div>

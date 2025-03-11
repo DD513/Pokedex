@@ -8,12 +8,14 @@ import { AuthService } from "../../../../core/services/auth.service";
   styleUrls: ["./login-form.component.css"],
 })
 export class LoginFormComponent implements OnInit {
+  @Output() loginSuccess = new EventEmitter<void>();
+  @Output() switchToRegister = new EventEmitter<void>();
+
   email: string = "";
   password: string = "";
   errorMessage: string = "";
 
   constructor(private router: Router, private authService: AuthService) {}
-  @Output() loginSuccess = new EventEmitter<void>();
   ngOnInit() {}
 
   onSubmitForm(event: Event) {

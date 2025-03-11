@@ -28,6 +28,10 @@
   border-radius: 10px;
   border: 2px solid #f1f1f1;
 }
+.card:hover .pokemon-Img::before,
+.pokemon-Img::after {
+  opacity: 1;
+}
 
 /* 卡片標題 */
 .card .card-title {

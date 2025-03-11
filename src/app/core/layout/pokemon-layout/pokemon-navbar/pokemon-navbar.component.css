@@ -52,17 +52,6 @@ nav {
   transition: opacity 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .logo-text {
-    display: none;
-  }
-
-  .logo img {
-    height: 30px;
-    width: 30px;
-  }
-}
-
 .menu-icon {
   width: 28px;
   height: 28px;
@@ -223,8 +212,38 @@ nav ul li:hover .menu-icon {
 }
 
 @media (max-width: 768px) {
+  .profile-container {
+    width: auto;
+    padding: 4px 8px;
+  }
+
+  .profile-name {
+    display: none;
+  }
+
+  .profile-avatar {
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    margin-right: 0;
+  }
+
+  .dropdown-menu-icon {
+    width: 16px;
+    height: 16px;
+  }
+
   .dropdown-menu {
     right: 12px;
     min-width: 160px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .logo img {
+    height: 30px;
+    width: 30px;
   }
 }
