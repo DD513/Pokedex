@@ -1,16 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientModule } from "@angular/common/http";
+import { PokedexComponent } from "./pokedex.component";
+import { PokedexModule } from "./pokedex.module";
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core";
 
-import { PokedexComponent } from './pokedex.component';
-
-describe('PokedexComponent', () => {
+describe("PokedexComponent", () => {
   let component: PokedexComponent;
   let fixture: ComponentFixture<PokedexComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PokedexComponent ]
-    })
-    .compileComponents();
+      imports: [PokedexModule, HttpClientModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('PokedexComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

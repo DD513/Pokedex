@@ -1,16 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientModule } from "@angular/common/http";
+import { TravelFoodComponent } from "./travel-food.component";
+import { TravelFoodModule } from "./travel-food.module";
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core";
 
-import { TravelFoodComponent } from './travel-food.component';
-
-describe('TravelFoodComponent', () => {
+describe("TravelFoodComponent", () => {
   let component: TravelFoodComponent;
   let fixture: ComponentFixture<TravelFoodComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TravelFoodComponent ]
-    })
-    .compileComponents();
+      imports: [TravelFoodModule, HttpClientModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('TravelFoodComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

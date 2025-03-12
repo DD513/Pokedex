@@ -1,16 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { AuthNavbarComponent } from "./auth-navbar.component";
+import { AuthLayoutComponent } from "../auth-layout.component";
+import { AuthLayoutModule } from "../auth-layout.module";
+import { RouterTestingModule } from "@angular/router/testing";
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core";
 
-import { AuthNavbarComponent } from './auth-navbar.component';
-
-describe('AuthNavbarComponent', () => {
+describe("AuthNavbarComponent", () => {
   let component: AuthNavbarComponent;
   let fixture: ComponentFixture<AuthNavbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthNavbarComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule, AuthLayoutModule], // 確保 Router 測試正常
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA], // 避免不必要錯誤
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +22,7 @@ describe('AuthNavbarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

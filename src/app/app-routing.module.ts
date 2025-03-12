@@ -29,7 +29,11 @@ const routes: Routes = [
         loadChildren:
           "./pages/pokemon/pokemon-dictionary/pokemon-dictionary.module#PokemonDictionaryModule",
       },
-      { path: "travel-food", component: TravelFoodComponent },
+      {
+        path: "travel-food",
+        loadChildren: "./pages/travel-food/travel-food.module#TravelFoodModule",
+      },
+      // { path: "travel-food", component: TravelFoodComponent },
     ],
   },
   {

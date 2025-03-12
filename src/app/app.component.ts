@@ -8,7 +8,7 @@ import { AuthService } from "./core/services/auth.service";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
-  // title = "pokemonGo";
+  title = "pokemonGo";
 
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit(): void {

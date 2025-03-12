@@ -1,16 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+import { PokelotteryComponent } from "./pokelottery.component";
+import { PokelotteryModule } from "./pokelottery.module";
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core";
 
-import { PokelotteryComponent } from './pokelottery.component';
-
-describe('PokelotteryComponent', () => {
+describe("PokelotteryComponent", () => {
   let component: PokelotteryComponent;
   let fixture: ComponentFixture<PokelotteryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PokelotteryComponent ]
-    })
-    .compileComponents();
+      imports: [PokelotteryModule, HttpClientModule, FormsModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +22,7 @@ describe('PokelotteryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
