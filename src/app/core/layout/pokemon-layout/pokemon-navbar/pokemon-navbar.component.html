@@ -37,17 +37,17 @@
 
       <li *ngIf="!isLoggedIn" (click)="openLoginModal()">
         <img [src]="loginIcon" alt="Login Logo" class="menu-icon" />
-        登入
+        <span class="dropdown-menu-text">登入</span>
       </li>
       <hr *ngIf="!isLoggedIn" class="dropdown-divider" />
 
       <li (click)="navigateTo('/pokedex')">
         <img [src]="pokedexLogo" alt="Pokedex Logo" class="menu-icon" />
-        寶可夢圖鑑
+        <span class="dropdown-menu-text">寶可夢圖鑑</span>
       </li>
       <li (click)="handleProtectedRouteNavigation('/pokelottery')">
         <img [src]="pokeLotteryLogo" alt="Pokelottery Logo" class="menu-icon" />
-        寶可夢抽抽樂
+        <span class="dropdown-menu-text">寶可夢抽抽樂</span>
       </li>
       <li (click)="navigateTo('/pokemon-dictionary')">
         <img
@@ -55,25 +55,25 @@
           alt="Dictionary Icon"
           class="menu-icon"
         />
-        寶可夢字典
+        <span class="dropdown-menu-text">寶可夢字典</span>
       </li>
 
       <hr class="dropdown-divider" />
 
       <li (click)="navigateTo('/pokedex')">
         <img [src]="pokemonNewsIcon" alt="Pokemon News" class="menu-icon" />
-        最新消息
+        <span class="dropdown-menu-text">最新消息</span>
       </li>
       <li (click)="navigateTo('/pokedex')">
         <img [src]="pokemonGoAppIcon" alt="PokemonGo News" class="menu-icon" />
-        取得Pokemon應用程式
+        <span class="dropdown-menu-text">取得Pokemon應用程式</span>
       </li>
 
       <hr *ngIf="isLoggedIn" class="dropdown-divider" />
 
       <li *ngIf="isLoggedIn" (click)="logout()">
         <img [src]="logoutIcon" alt="Logout Logo" class="menu-icon" />
-        登出
+        <span class="dropdown-menu-text">登出</span>
       </li>
     </ul>
   </div>
