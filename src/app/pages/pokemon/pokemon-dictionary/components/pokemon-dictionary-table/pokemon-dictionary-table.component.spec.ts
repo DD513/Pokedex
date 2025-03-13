@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PokemonDictionaryTableComponent } from './pokemon-dictionary-table.component';
+import { PokemonDictionaryTableComponent } from "./pokemon-dictionary-table.component";
 
-describe('PokemonDictionaryTableComponent', () => {
+describe("PokemonDictionaryTableComponent", () => {
   let component: PokemonDictionaryTableComponent;
   let fixture: ComponentFixture<PokemonDictionaryTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PokemonDictionaryTableComponent ]
-    })
-    .compileComponents();
+      declarations: [PokemonDictionaryTableComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PokemonDictionaryTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

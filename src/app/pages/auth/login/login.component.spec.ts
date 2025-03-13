@@ -11,7 +11,7 @@ describe("LoginComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [SharedModule, RouterTestingModule],
+      imports: [RouterTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
