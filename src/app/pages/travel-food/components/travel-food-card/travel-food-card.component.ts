@@ -7,7 +7,7 @@ import { TravelFood } from "../../../../core/models/travel-food.model";
   styleUrls: ["./travel-food-card.component.css"],
 })
 export class TravelFoodCardComponent implements OnInit {
-  @Input() travelFoodItem: TravelFood[] = [];
+  @Input() travelFoodItem: TravelFood;
   @Input() fallbackImage: string = "";
 
   constructor() {}
