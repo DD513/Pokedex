@@ -24,11 +24,13 @@ export class PokemonService {
   private favoritePokemonCodes: Set<string> = new Set();
   private favoritesSubject = new BehaviorSubject<Set<string>>(new Set()); // 讓 PokedexComponent 可以訂閱收藏變化
 
-  constructor(private apiService: ApiService) {}
-
-  ngOnInit() {
+  constructor(private apiService: ApiService) {
     this.loadFavorites();
   }
+
+  // ngOnInit() {
+  //   this.loadFavorites();
+  // }
 
   // 獲取所有寶可夢資料
   getAllPokemon(): Pokemon[] {
@@ -112,7 +114,7 @@ export class PokemonService {
   // 清空收藏
   clearFavorites(): void {
     this.favoritePokemonCodes.clear();
-    localStorage.removeItem("favoritePokemon");
+    localStorage.setItem("favoritePokemon", JSON.stringify([]));
     this.favoritesSubject.next(new Set());
   }
 
