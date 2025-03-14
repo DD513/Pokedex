@@ -18,6 +18,7 @@ describe("RegisterFormComponent", () => {
 
   beforeEach(async(() => {
     // **Mock AuthService**
+    // createSpyObj() 建立出來的物件型別是 jasmine.spyObj<T>
     authServiceSpy = jasmine.createSpyObj("AuthService", ["register"]);
 
     TestBed.configureTestingModule({
@@ -58,6 +59,7 @@ describe("RegisterFormComponent", () => {
     expect(authServiceSpy.register).not.toHaveBeenCalled(); // 確保未調用 AuthService
   });
 
+  // fakeAsync 負責測試 setTimeout、Promise 或 Observable 這類非同步行為
   it("should call AuthService.register() when submitting", fakeAsync(() => {
     authServiceSpy.register.and.returnValue(true);
     spyOn(component.registerSuccess, "emit");
@@ -67,8 +69,9 @@ describe("RegisterFormComponent", () => {
     component.password = "password";
     component.confirmPassword = "password";
 
-    component.onSubmitForm(new Event("submit")); // **手動呼叫表單送出**
+    component.onSubmitForm(new Event("submit")); // 手動呼叫表單送出
 
+    // tick() 用來模擬時間的推進，手動觸發非同步任務的執行。
     tick();
     fixture.detectChanges();
 
