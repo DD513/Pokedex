@@ -38,4 +38,9 @@ export const IMAGE_PATHS = {
 
   // 404 Not Found
   NOT_FOUND_404: "assets/images/not-found-url.png",
+
+  // components
+
+  // toast
+  SUCCESS_TOAST_ICON: "assets/images/success-toast-icon.png",
 };

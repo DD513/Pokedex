@@ -1,0 +1,6 @@
+:host {
+  position: fixed;
+  z-index: 2000;
+  top: 2%;
+  left: 50%;
+}

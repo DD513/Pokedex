@@ -1,0 +1,10 @@
+<div
+  class="fixed top-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-3 bg-white text-gray-800 px-6 py-4 rounded-lg shadow-lg border-2 border-green-400 transition-all duration-300 z-50"
+  [ngClass]="{
+    'opacity-100 translate-y-0': showToast,
+    'opacity-0 -translate-y-4': !showToast
+  }"
+>
+  <img [src]="successIcon" alt="成功" class="w-8 h-8 flex-shrink-0" />
+  <span class="font-medium text-base whitespace-nowrap">{{ message }}</span>
+</div>

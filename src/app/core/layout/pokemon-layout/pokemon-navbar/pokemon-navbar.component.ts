@@ -1,8 +1,8 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, ViewChild, OnInit, HostListener } from "@angular/core";
 import { IMAGE_PATHS } from "../../../../core/constants/image-paths";
 import { Router } from "@angular/router";
 import { AuthService } from "../../../../core/services/auth.service";
-import { User } from "../../../../core/models/user.model";
+import { SuccessToastComponent } from "../../../../shared/components/toast/success-toast/success-toast.component";
 
 @Component({
   selector: "app-pokemon-navbar",
@@ -10,11 +10,14 @@ import { User } from "../../../../core/models/user.model";
   styleUrls: ["./pokemon-navbar.component.css"],
 })
 export class PokemonNavbarComponent implements OnInit {
+  @ViewChild(SuccessToastComponent) toast!: SuccessToastComponent; // 取得 Toast 元件的參考
+
   isDropdownOpen = false;
   isLoggedIn = false;
   isLoginModalOpen = false;
   pendingRedirectAfterLogin = false;
   pendingRouteAfterLogin: string | null = null; // 記錄受保護頁面路由
+  showLoginToast = false;
 
   userAvatar: string = "";
   userName: string = "";
@@ -66,6 +69,9 @@ export class PokemonNavbarComponent implements OnInit {
 
   handleLoginCompleted() {
     this.isLoginModalOpen = false;
+
+    this.toast.showToastMessage("登入成功！開始冒險吧！");
+
     if (this.pendingRedirectAfterLogin && this.pendingRouteAfterLogin) {
       this.router.navigate([this.pendingRouteAfterLogin]);
       this.pendingRedirectAfterLogin = false;
@@ -92,6 +98,7 @@ export class PokemonNavbarComponent implements OnInit {
     this.authService.logout();
     this.isDropdownOpen = false;
     this.isLoggedIn = false;
+    this.toast.showToastMessage("登出成功！");
     // console.log("登出成功");
   }
 
