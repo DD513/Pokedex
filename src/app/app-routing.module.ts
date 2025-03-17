@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { TravelFoodComponent } from "./pages/travel-food/travel-food.component";
-import { AuthGuard } from "./core/guards/auth.guard";
 
 // 不同的 Layout
 import { PokemonLayoutComponent } from "./core/layout/pokemon-layout/pokemon-layout.component";
@@ -11,45 +9,13 @@ import { AuthLayoutComponent } from "./core/layout/auth-layout/auth-layout.compo
 const routes: Routes = [
   {
     path: "",
-    component: PokemonLayoutComponent,
-    children: [
-      { path: "", redirectTo: "/pokedex", pathMatch: "full" },
-      {
-        path: "pokedex",
-        loadChildren: "./pages/pokemon/pokedex/pokedex.module#PokedexModule",
-      },
-      {
-        path: "pokelottery",
-        loadChildren:
-          "./pages/pokemon/pokelottery/pokelottery.module#PokelotteryModule",
-        canActivate: [AuthGuard],
-      },
-      {
-        path: "pokemon-dictionary",
-        loadChildren:
-          "./pages/pokemon/pokemon-dictionary/pokemon-dictionary.module#PokemonDictionaryModule",
-      },
-      {
-        path: "travel-food",
-        loadChildren: "./pages/travel-food/travel-food.module#TravelFoodModule",
-      },
-      // { path: "travel-food", component: TravelFoodComponent },
-    ],
+    loadChildren:
+      "./core/layout/pokemon-layout/pokemon-layout.module#PokemonLayoutModule",
   },
   {
     path: "auth",
-    component: AuthLayoutComponent,
-    children: [
-      { path: "", redirectTo: "/auth/login", pathMatch: "full" },
-      {
-        path: "login",
-        loadChildren: "./pages/auth/login/login.module#LoginModule",
-      },
-      // {
-      //   path: "register",
-      //   loadChildren: "./pages/auth/register.module#RegisterModule",
-      // },
-    ],
+    loadChildren:
+      "./core/layout/auth-layout/auth-layout.module#AuthLayoutModule",
   },
   // {
   //   path: "admin",

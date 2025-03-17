@@ -7,6 +7,7 @@ import { SharedModule } from "../../../shared/shared.module";
 import { PokemonLayoutComponent } from "./pokemon-layout.component";
 import { PokemonNavbarComponent } from "./pokemon-navbar/pokemon-navbar.component";
 import { PokemonFooterComponent } from "./pokemon-footer/pokemon-footer.component";
+import { PokemonLayoutRoutingModule } from "./pokemon-layout-routing.module";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,12 @@ import { PokemonFooterComponent } from "./pokemon-footer/pokemon-footer.componen
     PokemonNavbarComponent,
     PokemonFooterComponent,
   ],
-  imports: [CommonModule, RouterModule, SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SharedModule,
+    PokemonLayoutRoutingModule,
+  ],
   exports: [PokemonLayoutComponent],
 })
 export class PokemonLayoutModule {}
