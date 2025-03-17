@@ -21,7 +21,16 @@ describe("AuthLayoutComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it("should create the layout", () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should render navbar and router outlet", () => {
+    const compiled = fixture.nativeElement;
+
+    const navbar = compiled.querySelector("app-auth-navbar");
+    expect(navbar).toBeTruthy();
+    const routerOutlet = compiled.querySelector("router-outlet");
+    expect(routerOutlet).toBeTruthy();
   });
 });

@@ -46,7 +46,7 @@ export class PokemonNavbarComponent implements OnInit {
         this.userEmail = user.email;
       } else {
         this.isLoggedIn = false;
-        this.userAvatar = "../../../assets/images/User/pokemon-trainer.png";
+        this.userAvatar = this.defaultAvatar;
         this.userName = "未知的冒險者";
         this.userEmail = "";
       }
@@ -54,12 +54,13 @@ export class PokemonNavbarComponent implements OnInit {
   }
 
   openLoginModal() {
+    this.closeDropdown();
     this.isLoginModalOpen = true;
   }
 
   handleProtectedRouteNavigation(route: string) {
     if (this.isLoggedIn) {
-      this.router.navigate([route]);
+      this.navigateTo(route);
     } else {
       this.pendingRedirectAfterLogin = true;
       this.pendingRouteAfterLogin = route;
@@ -79,33 +80,31 @@ export class PokemonNavbarComponent implements OnInit {
     }
   }
 
-  toggleDropdown(): void {
-    event.stopPropagation();
+  toggleDropdown(event: Event | null): void {
+    if (event) {
+      event.stopPropagation();
+    }
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   navigateTo(path: string): void {
+    this.closeDropdown();
     this.router.navigate([path]);
-    this.isDropdownOpen = false;
   }
-
-  // login(): void {
-  //   this.router.navigate(["/auth/login"]);
-  //   // console.log("登入功能開發中...");
-  // }
 
   logout(): void {
     this.authService.logout();
-    this.isDropdownOpen = false;
+    this.closeDropdown();
     this.isLoggedIn = false;
     this.toast.showToastMessage("登出成功！");
-    // console.log("登出成功");
   }
 
   @HostListener("document:click", ["$event"])
-  closeDropdown(event: Event): void {
-    if (this.isDropdownOpen) {
-      this.isDropdownOpen = false;
+  closeDropdown(event?: Event): void {
+    // 將 event.target 轉換成 HTMLElemen，因為EventTarget 沒有 closest() 方法。
+    if (event && (event.target as HTMLElement).closest(".dropdown-menu")) {
+      return;
     }
+    this.isDropdownOpen = false;
   }
 }

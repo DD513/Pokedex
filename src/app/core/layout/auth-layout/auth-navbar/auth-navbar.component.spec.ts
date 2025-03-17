@@ -1,18 +1,22 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { AuthNavbarComponent } from "./auth-navbar.component";
-import { AuthLayoutComponent } from "../auth-layout.component";
 import { AuthLayoutModule } from "../auth-layout.module";
 import { RouterTestingModule } from "@angular/router/testing";
+import { Router } from "@angular/router";
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe("AuthNavbarComponent", () => {
   let component: AuthNavbarComponent;
   let fixture: ComponentFixture<AuthNavbarComponent>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(async(() => {
+    routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl"]);
+
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, AuthLayoutModule], // 確保 Router 測試正常
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA], // 避免不必要錯誤
+      imports: [RouterTestingModule, AuthLayoutModule],
+      providers: [{ provide: Router, useValue: routerSpy }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -24,5 +28,13 @@ describe("AuthNavbarComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should navigate to home when logo is clicked", () => {
+    const compiled = fixture.nativeElement;
+    const logo = compiled.querySelector(".auth-navbar-logo");
+
+    logo.click();
+    expect(routerSpy.navigateByUrl).toHaveBeenCalledWith("/");
   });
 });

@@ -214,8 +214,8 @@ export class PokemonService {
   // 初始化 `names`，避免 undefined
   private initializePokemonNames(): PokemonNameTranslations {
     // reduce 可以用來累積（accumulate）資料，並轉換成一個新的值。 ["en", "englishName"],["ja", "japaneseName"]轉換為englishName: "",japaneseName: "",。
-    return Object.entries(PokemonLanguageMapping).reduce(
-      (pokemonNames, [_, displayName]) => {
+    return Object.values(PokemonLanguageMapping).reduce(
+      (pokemonNames, displayName) => {
         pokemonNames[displayName] = "";
         return pokemonNames;
       },

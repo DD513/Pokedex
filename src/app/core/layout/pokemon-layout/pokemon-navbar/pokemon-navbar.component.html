@@ -6,7 +6,7 @@
     </a>
   </div>
 
-  <div class="profile-container" (click)="toggleDropdown()">
+  <div class="profile-container" (click)="toggleDropdown($event)">
     <div class="profile-info">
       <img [src]="userAvatar" alt="User Avatar" class="profile-avatar" />
       <span class="profile-name">{{ userName }}</span>

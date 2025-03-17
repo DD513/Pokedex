@@ -10,7 +10,4 @@ export class AuthLayoutComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {}
-  goHome(): void {
-    this.router.navigateByUrl("/");
-  }
 }
