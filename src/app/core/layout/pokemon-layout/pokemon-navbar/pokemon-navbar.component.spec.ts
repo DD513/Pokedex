@@ -20,6 +20,7 @@ describe("PokemonNavbarComponent", () => {
   let authServiceSpy: jasmine.SpyObj<AuthService>;
   let routerSpy: jasmine.SpyObj<Router>;
   let currentUser$: BehaviorSubject<any>;
+  let toastSpy: any;
 
   beforeEach(async(() => {
     // 模擬 AuthService
@@ -46,6 +47,11 @@ describe("PokemonNavbarComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PokemonNavbarComponent);
     component = fixture.componentInstance;
+
+    // 建立 toast spy 對象
+    toastSpy = { showToastMessage: jasmine.createSpy("showToastMessage") };
+    component.toast = toastSpy as any;
+
     fixture.detectChanges();
   });
 
@@ -104,7 +110,108 @@ describe("PokemonNavbarComponent", () => {
   // });
 
   // 點擊登出後關閉選單，並觸發 authService.logout()
+  it("should logout and close dropdown when logout is called", () => {
+    component.isDropdownOpen = true;
+    component.logout();
+
+    expect(authServiceSpy.logout).toHaveBeenCalled();
+    expect(component.isDropdownOpen).toBe(false);
+    expect(component.isLoggedIn).toBe(false);
+    expect(toastSpy.showToastMessage).toHaveBeenCalledWith("登出成功！");
+  });
+
   // 驗證 handleProtectedRouteNavigation() 的邏輯
-  // 登入後成功導航到保護路由
-  // 未登入時點擊保護路由，開啟登入彈窗
+  // describe('handleProtectedRouteNavigation', () => {
+  //   // 登入後成功導航到保護路由
+  //   it("should navigate to protected route when user is logged in", () => {
+  //     component.isLoggedIn = true;
+  //     component.handleProtectedRouteNavigation('/pokelottery');
+
+  //     expect(routerSpy.navigate).toHaveBeenCalledWith(['/pokelottery']);
+  //     expect(component.isDropdownOpen).toBe(false);
+  //   });
+
+  //   // 未登入時點擊保護路由，開啟登入彈窗
+  //   it("should open login modal and save pending route when user is not logged in", () => {
+  //     component.isLoggedIn = false;
+  //     component.handleProtectedRouteNavigation('/pokelottery');
+
+  //     expect(component.isLoginModalOpen).toBe(true);
+  //     expect(component.pendingRedirectAfterLogin).toBe(true);
+  //     expect(component.pendingRouteAfterLogin).toBe('/pokelottery');
+  //     expect(routerSpy.navigate).not.toHaveBeenCalled();
+  //   });
+  // });
+
+  // 測試處理登入完成事件
+  describe("handleLoginCompleted", () => {
+    it("should close modal and show success toast", () => {
+      component.handleLoginCompleted();
+
+      expect(component.isLoginModalOpen).toBe(false);
+      expect(toastSpy.showToastMessage).toHaveBeenCalledWith(
+        "登入成功！開始冒險吧！"
+      );
+    });
+
+    // it("should navigate to pending route if one exists", () => {
+    //   component.toast = { showToastMessage: jasmine.createSpy('showToastMessage') } as any;
+    //   component.pendingRedirectAfterLogin = true;
+    //   component.pendingRouteAfterLogin = '/pokelottery';
+
+    //   component.handleLoginCompleted();
+
+    //   expect(routerSpy.navigate).toHaveBeenCalledWith(['/pokelottery']);
+    //   expect(component.pendingRedirectAfterLogin).toBe(false);
+    //   expect(component.pendingRouteAfterLogin).toBe(null);
+    // });
+
+    // it("should not navigate if no pending route exists", () => {
+    //   component.toast = { showToastMessage: jasmine.createSpy('showToastMessage') } as any;
+    //   component.pendingRedirectAfterLogin = false;
+    //   component.pendingRouteAfterLogin = null;
+
+    //   component.handleLoginCompleted();
+
+    //   expect(routerSpy.navigate).not.toHaveBeenCalled();
+    // });
+  });
+
+  // 測試登入狀態變更時的用戶資訊更新
+  describe("user authentication state", () => {
+    it("should update user info when logged in", () => {
+      const mockUser = {
+        name: "Ash Ketchum",
+        email: "ash@gmail.com",
+        image: "Ash.png",
+      };
+
+      currentUser$.next(mockUser);
+      fixture.detectChanges();
+
+      expect(component.isLoggedIn).toBe(true);
+      expect(component.userName).toBe("Ash Ketchum");
+      expect(component.userEmail).toBe("ash@gmail.com");
+      expect(component.userAvatar).toBe("Ash.png");
+    });
+
+    it("should use default info when not logged in", () => {
+      currentUser$.next(null);
+      fixture.detectChanges();
+
+      expect(component.isLoggedIn).toBe(false);
+      expect(component.userName).toBe("未知的冒險者");
+      expect(component.userEmail).toBe("");
+      expect(component.userAvatar).toBe(component.defaultAvatar);
+    });
+  });
+
+  // 測試打開登入 Modal
+  it("should open login modal and close dropdown", () => {
+    component.isDropdownOpen = true;
+    component.openLoginModal();
+
+    expect(component.isLoginModalOpen).toBe(true);
+    expect(component.isDropdownOpen).toBe(false);
+  });
 });
