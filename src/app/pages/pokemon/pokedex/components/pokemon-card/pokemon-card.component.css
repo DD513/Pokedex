@@ -21,15 +21,15 @@
 }
 
 /* 卡片內的圖片 */
-.pokemon-Img {
+.pokemon-img {
   width: 72%;
   margin: 10px auto;
   display: block;
   border-radius: 10px;
   border: 2px solid #f1f1f1;
 }
-.card:hover .pokemon-Img::before,
-.pokemon-Img::after {
+.card:hover .pokemon-img::before,
+.pokemon-img::after {
   opacity: 1;
 }
 
