@@ -16,7 +16,7 @@
             <p>
               <strong>類型:</strong>
               <span
-                *ngFor="let type of lotteryResult.Types"
+                *ngFor="let type of lotteryResult?.Types || []"
                 class="type-badge"
                 [style.backgroundColor]="getTypeColor(type.Name)"
                 [style.color]="'#fff'"

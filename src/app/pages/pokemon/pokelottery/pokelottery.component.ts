@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { PokemonService } from "../../../core/services/pokemon.service";
 import { Pokemon } from "../../../core/models/pokemon.model";
 
@@ -7,10 +7,11 @@ import { Pokemon } from "../../../core/models/pokemon.model";
   templateUrl: "./pokelottery.component.html",
   styleUrls: ["./pokelottery.component.css"],
 })
-export class PokelotteryComponent implements OnInit {
+export class PokelotteryComponent implements OnInit, OnDestroy {
   lotteryResult: Pokemon | null = null;
   gameCount: number = 0;
   isDrawing: boolean = false;
+  private drawTimeout: any;
 
   constructor(private pokemonService: PokemonService) {}
 
@@ -18,12 +19,18 @@ export class PokelotteryComponent implements OnInit {
     this.startNewLottery(); // 直接顯示初始寶可夢
   }
 
+  ngOnDestroy() {
+    if (this.drawLottery) {
+      clearTimeout(this.drawTimeout);
+    }
+  }
+
   drawLottery() {
     if (this.isDrawing) return; // 如果正在抽獎，直接返回，避免重複點擊
     this.isDrawing = true;
     this.lotteryResult = null;
 
-    setTimeout(() => {
+    this.drawTimeout = setTimeout(() => {
       this.startNewLottery();
     }, 800);
   }
