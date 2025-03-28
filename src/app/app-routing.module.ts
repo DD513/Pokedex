@@ -5,7 +5,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { PokemonLayoutComponent } from "./core/layout/pokemon-layout/pokemon-layout.component";
 import { AuthLayoutComponent } from "./core/layout/auth-layout/auth-layout.component";
 // import { AdminLayoutComponent } from "./components/layout/admin-layout/admin-layout.component";
-
+import { AnimalModule } from "./pages/animal/animal.module";
 const routes: Routes = [
   {
     path: "",
@@ -24,6 +24,10 @@ const routes: Routes = [
   //     { path: "dashboard", loadChildren: "./pages/admin/dashboard.module#DashboardModule" },
   //   ],
   // },
+  {
+    path: "animal-planet",
+    loadChildren: "./pages/animal/animal.module#AnimalModule",
+  },
   {
     path: "404",
     loadChildren: "./pages/not-found/not-found.module#NotFoundModule",

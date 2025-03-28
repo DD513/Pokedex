@@ -1,0 +1,9 @@
+.zdog-canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #1a252f; /* 深藍色星空背景 */
+}

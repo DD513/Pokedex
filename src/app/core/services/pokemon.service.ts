@@ -191,19 +191,6 @@ export class PokemonService {
         this.apiService.getPokemonSpeciesDetails(pokemon.speciesUrl).pipe(
           map((response) => ({
             ...pokemon,
-            // names: {
-            //   englishName: this.extractNames(response.names, "en"),
-            //   japaneseName: this.extractNames(response.names, "ja"),
-            //   koreanName: this.extractNames(response.names, "ko"),
-            //   traditionalChineseName: this.extractNames(
-            //     response.names,
-            //     "zh-Hant"
-            //   ),
-            //   simplifiedChineseName: this.extractNames(
-            //     response.names,
-            //     "zh-Hans"
-            //   ),
-            // },
             names: this.extractAllNames(response.names),
           }))
         )
@@ -248,10 +235,4 @@ export class PokemonService {
     );
     return nameEntry ? nameEntry.name : "";
   }
-
-  // 提取指定語言的分類名稱
-  // private extractNames(namesList: any[], languageCode: string): string {
-  //   const namesObj = namesList.find((n) => n.language.name === languageCode);
-  //   return namesObj ? namesObj.name : "undefined"; // 若找不到則返回 "undefined"
-  // }
 }
