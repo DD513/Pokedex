@@ -1,50 +1,67 @@
-// import { TestBed, inject } from "@angular/core/testing";
-// import { Router } from "@angular/router";
-// import { AuthGuard } from "./auth.guard";
-// import { AuthService } from "../services/auth.service";
-// import { RouterTestingModule } from "@angular/router/testing";
-// import { of } from "rxjs";
+import { TestBed, async } from "@angular/core/testing";
+import { Router } from "@angular/router";
+import { AuthGuard } from "./auth.guard";
+import { AuthService } from "../services/auth.service";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 
-// describe("AuthGuard", () => {
-//   let authGuard: AuthGuard;
-//   let authService: jasmine.SpyObj<AuthService>;
-//   let router: jasmine.SpyObj<Router>;
+describe("AuthGuard", () => {
+  let authGuard: AuthGuard;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let router: jasmine.SpyObj<Router>;
 
-//   beforeEach(() => {
-//     // 建立 Mock 服務
-//     const authServiceMock = jasmine.createSpyObj("AuthService", [
-//       "checkIsLoggedIn",
-//     ]);
-//     const routerMock = jasmine.createSpyObj("Router", ["navigate"]);
+  // 模擬路由快照 (ActivatedRouteSnapshot 和 RouterStateSnapshot)
+  const mockRoute = {} as ActivatedRouteSnapshot;
+  const mockState = { url: "/protected" } as RouterStateSnapshot;
 
-//     TestBed.configureTestingModule({
-//       imports: [RouterTestingModule], // 模擬 RouterModule
-//       providers: [
-//         AuthGuard,
-//         { provide: AuthService, useValue: authServiceMock },
-//         { provide: Router, useValue: routerMock },
-//       ],
-//     });
+  beforeEach(() => {
+    // 模擬 AuthService
+    const authSpy = jasmine.createSpyObj("AuthService", ["checkIsLoggedIn"]);
+    // 模擬 Router
+    const routerSpy = jasmine.createSpyObj("Router", ["navigate"]);
 
-//     // 取得注入的服務
-//     authGuard = TestBed.inject(AuthGuard);
-//     authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
-//     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-//   });
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule], // 模擬 RouterModule
+      providers: [
+        AuthGuard,
+        { provide: AuthService, useValue: authSpy },
+        { provide: Router, useValue: routerSpy },
+      ],
+    });
 
-//   it("should be created", () => {
-//     expect(authGuard).toBeTruthy();
-//   });
+    // 取得注入的服務
+    authGuard = TestBed.get(AuthGuard);
+    authServiceSpy = TestBed.get(AuthService) as jasmine.SpyObj<AuthService>;
+    router = TestBed.get(Router) as jasmine.SpyObj<Router>;
+  });
 
-//   it("should allow navigation if user is logged in", () => {
-//     authService.checkIsLoggedIn.and.returnValue(true); // 模擬使用者已登入
-//     expect(authGuard.canActivate(null, null)).toBeTrue();
-//     expect(router.navigate).not.toHaveBeenCalled(); // 不應該導航
-//   });
+  it("should be created", () => {
+    expect(authGuard).toBeTruthy();
+  });
 
-//   it("should navigate to /pokedex if user is not logged in", () => {
-//     authService.checkIsLoggedIn.and.returnValue(false); // 模擬使用者未登入
-//     expect(authGuard.canActivate(null, null)).toBeFalse();
-//     expect(router.navigate).toHaveBeenCalledWith(["/pokedex"]); // 確保導航至 `/pokedex`
-//   });
-// });
+  // 測試已登入的情況
+  it("should allow activation when user is logged in", () => {
+    // Arrange: 模擬已登入
+    authServiceSpy.checkIsLoggedIn.and.returnValue(true);
+
+    // Act: 執行 canActivate
+    const result = authGuard.canActivate(mockRoute, mockState);
+
+    // Assert: 確認返回 true，且不導航
+    expect(result).toBe(true);
+    expect(router.navigate).not.toHaveBeenCalled();
+  });
+
+  // 測試未登入的情況
+  it("should deny activation and redirect to /pokedex when user is not logged in", () => {
+    // Arrange: 模擬未登入
+    authServiceSpy.checkIsLoggedIn.and.returnValue(false);
+
+    // Act: 執行 canActivate
+    const result = authGuard.canActivate(mockRoute, mockState);
+
+    // Assert: 確認返回 false，且導航到 /pokedex
+    expect(result).toBe(false);
+    expect(router.navigate).toHaveBeenCalledWith(["/pokedex"]);
+  });
+});
