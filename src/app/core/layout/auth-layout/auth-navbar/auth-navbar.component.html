@@ -1,3 +1,14 @@
-<nav class="auth-navbar">
+<!-- <nav class="auth-navbar">
   <div class="auth-navbar-logo" (click)="goHome()">Pokemon</div>
+</nav> -->
+<nav
+  class="fixed top-0 left-0 w-full h-20 flex items-center px-5 py-2.5 bg-black border-b-4 border-yellow-400 z-[999] bg-[radial-gradient(circle,rgba(255,255,255,0.2)_1px,transparent_1px),radial-gradient(circle,rgba(255,255,255,0.1)_2px,transparent_2px)] bg-[length:40px_40px,80px_80px]"
+>
+  <div
+    data-test="auth-navbar-logo"
+    class="text-2xl font-bold text-yellow-400 cursor-pointer drop-shadow-sm hover:scale-105 transition-transform duration-200"
+    (click)="goHome()"
+  >
+    Pokemon
+  </div>
 </nav>

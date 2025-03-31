@@ -32,7 +32,8 @@ describe("AuthNavbarComponent", () => {
 
   it("should navigate to home when logo is clicked", () => {
     const compiled = fixture.nativeElement;
-    const logo = compiled.querySelector(".auth-navbar-logo");
+    // const logo = compiled.querySelector(".auth-navbar-logo");
+    const logo = compiled.querySelector("[data-test='auth-navbar-logo']");
 
     logo.click();
     expect(routerSpy.navigateByUrl).toHaveBeenCalledWith("/");
